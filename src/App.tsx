@@ -1,11 +1,36 @@
+import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import PartnerWithUs from "./pages/PartnerWithUs";
 import "./App.css";
-import LandingPage from "./components/landing-page";
+
+// ScrollToTop component to handle scrolling on route change
+const ScrollToTop = () => {
+  const { pathname, state } = useLocation();
+
+  useEffect(() => {
+    if (state && (state as any).scrollTo) {
+      const element = document.getElementById((state as any).scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, state]);
+
+  return null;
+};
 
 function App() {
   return (
-    <>
-      <LandingPage />
-    </>
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/partner-with-us" element={<PartnerWithUs />} />
+      </Routes>
+    </Router>
   );
 }
 
