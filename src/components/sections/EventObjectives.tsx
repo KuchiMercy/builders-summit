@@ -52,7 +52,7 @@ const EventObjectives = () => {
             <div className="space-y-4">
               {objectives.map((obj, index) => (
                 <div key={index} className="group p-8 rounded-4xl border border-white/10 hover:bg-white hover:text-black transition-all duration-500 flex gap-6 items-start">
-                  <div className="flex-shrink-0 mt-1">
+                  <div className="shrink-0 mt-1">
                     <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors duration-500">
                       <Check size={20} />
                     </div>

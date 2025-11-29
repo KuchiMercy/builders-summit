@@ -19,7 +19,7 @@ const MissionImpactGoal = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Mission */}
-          <div className="group relative bg-white/5 border border-white/10 rounded-[2rem] p-8 hover:bg-white hover:text-black transition-all duration-500">
+          <div className="group relative bg-white/5 border border-white/10 rounded-4xl p-8 hover:bg-white hover:text-black transition-all duration-500">
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-5 transition-opacity">
               <Compass size={120} />
             </div>
@@ -39,7 +39,7 @@ const MissionImpactGoal = () => {
           </div>
 
           {/* Impact */}
-          <div className="group relative bg-white/5 border border-white/10 rounded-[2rem] p-8 hover:bg-white hover:text-black transition-all duration-500">
+          <div className="group relative bg-white/5 border border-white/10 rounded-4xl p-8 hover:bg-white hover:text-black transition-all duration-500">
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-5 transition-opacity">
               <Globe size={120} />
             </div>
@@ -59,7 +59,7 @@ const MissionImpactGoal = () => {
           </div>
 
           {/* Goal */}
-          <div className="group relative bg-white/5 border border-white/10 rounded-[2rem] p-8 hover:bg-white hover:text-black transition-all duration-500">
+          <div className="group relative bg-white/5 border border-white/10 rounded-4xl p-8 hover:bg-white hover:text-black transition-all duration-500">
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-5 transition-opacity">
               <Target size={120} />
             </div>

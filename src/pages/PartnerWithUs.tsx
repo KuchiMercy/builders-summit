@@ -33,7 +33,7 @@ const PartnerWithUs = () => {
               alt="Partnership Meeting" 
               className="w-full h-full object-cover opacity-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/50 to-black"></div>
           </div>
 
           <div className="relative z-10 max-w-5xl mx-auto px-4">
@@ -129,7 +129,7 @@ const PartnerWithUs = () => {
                     "Consulting Firms focused on organizational growth."
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black">
+                      <div className="shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black">
                         <CheckCircle2 size={18} />
                       </div>
                       <p className="text-lg font-medium text-gray-200">{item}</p>

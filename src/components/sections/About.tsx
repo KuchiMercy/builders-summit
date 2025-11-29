@@ -10,7 +10,7 @@ const About = () => {
           
             <h2 className="text-4xl md:text-6xl font-black text-black mb-8 leading-tight">
               More Than Just <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-black">A Summit.</span>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-500 to-black">A Summit.</span>
             </h2>
             <div className="space-y-6 text-gray-700 text-lg leading-relaxed font-light">
               <p className="border-l-4 border-black pl-6">
@@ -27,7 +27,7 @@ const About = () => {
           </div>
           
           <div className="w-full lg:w-1/2 relative">
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative z-10">
+            <div className="aspect-4/3 rounded-3xl overflow-hidden shadow-2xl relative z-10">
                {/* Placeholder for About Image - Use a high-quality Unsplash image */}
                <img 
                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80" 

@@ -48,7 +48,7 @@ const WhatToExpect = () => {
           
             <h2 className="text-5xl md:text-7xl font-black text-black tracking-tighter leading-none">
               WHAT TO <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-black">EXPECT</span>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-500 to-black">EXPECT</span>
             </h2>
           </div>
           <p className="text-xl text-gray-600 max-w-md mt-8 md:mt-0 text-right md:text-left font-medium border-l-4 border-black pl-6">
