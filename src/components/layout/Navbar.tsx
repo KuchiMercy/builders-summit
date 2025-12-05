@@ -63,7 +63,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {["About", "Speakers", "Schedule", "FAQ"].map((item) => (
+            {["About", "Speakers", "FAQ"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -94,7 +94,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-black/5 absolute w-full shadow-lg">
           <div className="px-4 py-6 space-y-4 flex flex-col">
-            {["About", "Speakers", "Schedule", "FAQ"].map((item) => (
+            {["About", "Speakers", "FAQ"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}

@@ -13,10 +13,37 @@ const PartnerWithUs = () => {
     reason: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    // Handle submission
+    setStatus("submitting");
+    
+    try {
+      const response = await fetch('/api/partner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Submission failed');
+
+      setStatus("success");
+      // Reset form
+      setFormData({
+        fullName: "",
+        orgName: "",
+        email: "",
+        phone: "",
+        partnershipType: "",
+        reason: "",
+      });
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error) {
+      console.error("Error submitting partnership form:", error);
+      alert("Failed to submit. Please try again.");
+      setStatus("idle");
+    }
   };
 
   return (
@@ -29,7 +56,7 @@ const PartnerWithUs = () => {
            {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80" 
+              src="/images/leadership-labs.jpg" 
               alt="Partnership Meeting" 
               className="w-full h-full object-cover opacity-40"
             />
@@ -234,20 +261,14 @@ const PartnerWithUs = () => {
                 ></textarea>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-black uppercase tracking-wider">Upload Proposal (Optional)</label>
-                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-black hover:bg-gray-50 transition-all cursor-pointer group">
-                  <Upload className="mx-auto h-10 w-10 text-gray-400 group-hover:text-black mb-4 transition-colors" />
-                  <p className="text-sm text-gray-600 font-medium">Click to upload or drag and drop</p>
-                  <p className="text-xs text-gray-400 mt-2">PDF, DOCX up to 10MB</p>
-                </div>
-              </div>
+          
 
               <button
                 type="submit"
-                className="w-full bg-black text-white font-bold py-5 rounded-xl hover:bg-gray-800 transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 text-lg shadow-xl"
+                disabled={status === "submitting"}
+                className="w-full bg-black text-white font-bold py-5 rounded-xl hover:bg-gray-800 transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 text-lg shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit Interest
+                {status === "submitting" ? "Submitting..." : status === "success" ? "Submitted Successfully!" : "Submit Interest"}
                 <Send size={20} />
               </button>
             </form>

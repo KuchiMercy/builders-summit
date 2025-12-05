@@ -33,11 +33,38 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    // Simulate API call
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Registration failed');
+
       setStatus("success");
-      // Reset form after success if needed
-    }, 1500);
+      // Reset form after success
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        linkedin: "",
+        cityCountry: "",
+        organization: "",
+        role: "",
+        industry: "",
+        experience: "",
+        source: "",
+        goals: "",
+        community: false,
+      });
+    } catch (error) {
+      console.error("Error submitting registration:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+    }
   };
 
   return (

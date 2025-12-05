@@ -8,10 +8,30 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle submission
-    console.log(formData);
+    setStatus("submitting");
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Submission failed');
+
+      setStatus("success");
+      // Reset form
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 3000);
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("Failed to send message. Please try again.");
+      setStatus("idle");
+    }
   };
 
   return (
@@ -22,10 +42,7 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-white mb-6">
-              <Sparkles size={16} className="text-yellow-400" />
-              <span className="text-xs font-bold uppercase tracking-widest">Contact Us</span>
-            </div>
+           
             <h2 className="text-5xl md:text-7xl font-black text-black mb-8 tracking-tighter">
               GET IN <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-500 to-black">TOUCH</span>
             </h2>
@@ -100,9 +117,10 @@ const Contact = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg text-lg"
+                disabled={status === "submitting"}
+                className="w-full bg-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status === "submitting" ? "Sending..." : status === "success" ? "Message Sent!" : "Send Message"}
                 <Send size={20} />
               </button>
             </div>
