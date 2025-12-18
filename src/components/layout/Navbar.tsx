@@ -34,14 +34,15 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
   };
 
   // Determine text color based on theme and scroll state
-  // If scrolled, always black text (on white bg).
+  // If scrolled, always dark text (on white bg).
   // If not scrolled, depends on theme.
-  const textColorClass = isScrolled || theme === "light" ? "text-black" : "text-white";
+  const textColorClass = isScrolled || theme === "light" ? "text-dark" : "text-white";
   const buttonClass = isScrolled || theme === "light" 
-    ? "bg-black text-white hover:bg-gray-800" 
-    : "bg-white text-black hover:bg-gray-200";
-  const logoBgClass = isScrolled || theme === "light" ? "bg-black" : "bg-white";
-  const logoTextClass = isScrolled || theme === "light" ? "text-white" : "text-black";
+    ? "bg-primary text-white hover:opacity-90" 
+    : "bg-white text-dark hover:bg-primary/10";
+  // const logoBgClass = isScrolled || theme === "light" ? "bg-primary" : "bg-white";
+  // const logoTextClass = isScrolled || theme === "light" ? "text-white" : "text-primary";
+  const logoSrc = isScrolled || theme === "light" ? "/images/vbs-logo.png" : "/images/vbs-light.png";
 
   return (
     <nav 
@@ -53,12 +54,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${logoBgClass}`}>
-                <span className={`font-bold text-xl ${logoTextClass}`}>VB</span>
-            </div>
-            <span className={`text-xl font-bold tracking-tight transition-colors ${textColorClass}`}>
-              Visionary Builders Summit
-            </span>
+            <img src={logoSrc} alt="VB Logo" width={100} height={100} />
           </Link>
 
           {/* Desktop Menu */}
@@ -67,7 +63,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className={`${textColorClass} hover:opacity-70 transition-all text-sm font-medium`}
+                className={`${textColorClass} hover:text-primary transition-all text-sm font-bold uppercase tracking-widest`}
               >
                 {item}
               </button>
@@ -92,13 +88,13 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-black/5 absolute w-full shadow-lg">
+        <div className="md:hidden bg-white border-t border-dark/5 absolute w-full shadow-lg">
           <div className="px-4 py-6 space-y-4 flex flex-col">
             {["About", "Speakers", "FAQ"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-gray-600 hover:text-black text-left py-2"
+                className="text-dark hover:text-primary text-left py-2"
               >
                 {item}
               </button>
@@ -106,7 +102,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
             <Link
               to="/partner-with-us"
               onClick={() => setIsMenuOpen(false)}
-              className="bg-black text-white px-6 py-3 rounded-full font-medium text-center hover:bg-gray-800"
+              className="bg-primary text-white px-6 py-3 rounded-full font-medium text-center hover:opacity-90"
             >
               Partner with Us
             </Link>

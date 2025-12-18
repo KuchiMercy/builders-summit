@@ -1,5 +1,5 @@
-import { db, resend, emailTemplates, ADMIN_EMAIL, FROM_EMAIL } from './_utils';
-import * as admin from 'firebase-admin';
+import { db, resend, emailTemplates, ADMIN_EMAIL, FROM_EMAIL } from './_utils.js';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
@@ -12,7 +12,7 @@ export default async function handler(req: any, res: any) {
     // 1. Save to Firestore
     const docRef = await db.collection('contacts').add({
       ...data,
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      timestamp: FieldValue.serverTimestamp(),
     });
 
     // 2. Send User Confirmation Email

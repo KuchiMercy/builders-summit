@@ -35,8 +35,8 @@ const FAQ = () => {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
         
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">
-            GOT <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-gray-500">QUESTIONS?</span>
+        <h2 className="text-5xl md:text-7xl font-black text-light mb-6 tracking-tighter">
+            GOT QUESTIONS?
           </h2>
         </div>
         

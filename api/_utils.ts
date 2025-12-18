@@ -1,13 +1,14 @@
 import { Resend } from 'resend';
-import * as admin from 'firebase-admin';
+import { initializeApp, getApps, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 
 // Initialize Resend
 export const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Initialize Firebase Admin
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
+if (!getApps().length) {
+  initializeApp({
+    credential: cert({
       projectId: process.env.VITE_FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
       privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
@@ -15,7 +16,7 @@ if (!admin.apps.length) {
   });
 }
 
-export const db = admin.firestore();
+export const db = getFirestore();
 
 // Configuration
 export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'visionarybuilderssummit@gmail.com';
@@ -382,6 +383,60 @@ export const emailTemplates = {
               </ul>
 
               <p>See you in the morning!</p>
+              <p><strong>The Visionary Builders Team</strong></p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `,
+  }),
+
+  // Morning-of-Event Reminder (Day 0)
+  reminderMorning: (data: any) => ({
+    subject: "Today is the Day! Visionary Builders Summit 🎉",
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #F78628 0%, #ff9d4d 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+            .highlight-box { background: white; padding: 25px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #F78628; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+            .time-box { background: #1D1D1D; color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1 style="font-size: 36px; margin: 0;">🎉 TODAY IS THE DAY!</h1>
+              <p style="font-size: 18px; margin: 10px 0 0 0;">Visionary Builders Summit</p>
+            </div>
+            <div class="content">
+              <h2>Good Morning, ${data.firstName}! ☀️</h2>
+              <p style="font-size: 18px;">The moment we've all been waiting for is finally here! Get ready for an incredible day of learning, networking, and building the future together.</p>
+              
+              <div class="time-box">
+                <h3 style="margin-top: 0; color: #F78628;">⏰ EVENT STARTS IN A FEW HOURS</h3>
+                <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">9:30 AM Sharp</p>
+                <p style="margin: 0; opacity: 0.9;">Registration opens at 8:30 AM</p>
+              </div>
+
+              <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #1D1D1D;">📍 Event Details</h3>
+                <p><strong>Venue:</strong> The Summit Center, 123 Innovation Drive</p>
+                <p><strong>Registration:</strong> 8:30 AM - 9:30 AM</p>
+                <p><strong>Opening Session:</strong> 9:30 AM</p>
+                <p><strong>Dress Code:</strong> Business Casual</p>
+              </div>
+
+              <div style="background: #fff3e6; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #F78628;">
+                <p style="margin: 0; font-size: 16px;"><strong>💡 Pro Tip:</strong> The best connections happen during breaks and networking sessions. Don't be shy—introduce yourself!</p>
+              </div>
+
+              <p style="font-size: 18px; margin-top: 30px;">We're so excited to see you today. Let's make this summit unforgettable!</p>
+              <p><strong>See you in a few hours! 🚀</strong></p>
               <p><strong>The Visionary Builders Team</strong></p>
             </div>
           </div>

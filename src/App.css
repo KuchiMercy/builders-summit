@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Benzin';
+  src: url('/fonts/Benzin-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benzin';
+  src: url('/fonts/Benzin-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benzin';
+  src: url('/fonts/Benzin-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-primary: #F78628;
+  --color-dark: #1D1D1D;
+  --color-background: #ffffff;
+  
+  /* Update font families */
+  --font-display: "Benzin", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+  
+  /* Map Tailwind's default sans to Benzin for headings if desired, or keep as display */
+  --font-sans: "Montserrat", sans-serif; 
+}
+
+/* Base styles to apply fonts */
+body {
+  font-family: var(--font-body);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}

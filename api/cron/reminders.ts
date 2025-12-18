@@ -1,4 +1,4 @@
-import { db, resend, emailTemplates, FROM_EMAIL } from '../_utils';
+import { db, resend, emailTemplates, FROM_EMAIL } from '../_utils.js';
 
 // Set your event date here (YYYY-MM-DD format)
 const EVENT_DATE = new Date('2026-03-28T09:00:00Z');
@@ -32,6 +32,12 @@ export default async function handler(req: any, res: any) {
       console.log("[CRON] Sending 24h reminder");
       templateToUse = emailTemplates.reminder24h;
       emailSubject = "24h Reminder";
+    }
+    // Check for morning of event (0 days)
+    else if (diffDays === 0) {
+      console.log("[CRON] Sending morning-of-event reminder");
+      templateToUse = emailTemplates.reminderMorning;
+      emailSubject = "Morning-of-Event Reminder";
     }
     else {
       return res.status(200).json({ 

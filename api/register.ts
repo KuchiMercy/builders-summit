@@ -1,5 +1,5 @@
-import { db, resend, emailTemplates, ADMIN_EMAIL, FROM_EMAIL } from './_utils';
-import * as admin from 'firebase-admin';
+import { db, resend, emailTemplates, ADMIN_EMAIL, FROM_EMAIL } from './_utils.js';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
@@ -9,7 +9,7 @@ export default async function handler(req: any, res: any) {
   try {
     const data = req.body;
     
-    // 0. Check for duplicate email
+    // Check for duplicate email
     const existing = await db.collection('registrations')
       .where('email', '==', data.email)
       .get();
@@ -18,20 +18,20 @@ export default async function handler(req: any, res: any) {
       return res.status(409).json({ error: 'This email is already registered.' });
     }
 
-    // 1. Save to Firestore
+    // Save to Firestore
     const docRef = await db.collection('registrations').add({
       ...data,
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      timestamp: FieldValue.serverTimestamp(),
     });
 
-    // 2. Send User Confirmation Email
+    // Send User Confirmation Email
     await resend.emails.send({
       from: FROM_EMAIL,
       to: data.email,
       ...emailTemplates.registrationUser(data),
     });
 
-    // 3. Send Admin Notification Email
+    // Send Admin Notification Email
     await resend.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
