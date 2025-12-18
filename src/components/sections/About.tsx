@@ -8,14 +8,13 @@ const About = () => {
         <div className="flex flex-col lg:flex-row gap-16 items-center">
           <div className="w-full lg:w-1/2">
           
-            <h2 className="text-4xl md:text-6xl font-black text-dark mb-8 leading-tight">
+            <h2 className="text-4xl md:text-6xl font-black text-black mb-8 leading-tight">
               More Than Just <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-dark/60 to-primary">A Summit.</span>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-500 to-black">A Summit.</span>
             </h2>
-
-            <div className="space-y-6 text-dark/80 text-lg leading-relaxed font-light border-l-4 border-primary pl-6">
-              <p className="">
-                <strong className="text-dark font-bold block mb-2">The Vision</strong>
+            <div className="space-y-6 text-gray-700 text-lg leading-relaxed font-light">
+              <p className="border-l-4 border-black pl-6">
+                <strong className="text-black font-bold block mb-2">The Vision</strong>
                 For any real change to occur, communities, businesses, and nations require visionary builders—individuals who can turn ideas into tangible impact.
               </p>
               <p>
@@ -31,7 +30,7 @@ const About = () => {
             <div className="aspect-4/3 rounded-3xl overflow-hidden shadow-2xl relative z-10">
                {/* Placeholder for About Image - Use a high-quality Unsplash image */}
                <img 
-                 src="/images/audience.jpg" 
+                 src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80" 
                  alt="Conference Crowd" 
                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                />
