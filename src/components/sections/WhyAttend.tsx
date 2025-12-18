@@ -32,8 +32,8 @@ const WhyAttend = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
          
-            <h2 className="text-5xl md:text-7xl font-black text-light mb-6 tracking-tighter">
-            WHY ATTEND?
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">
+            WHY <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-gray-500">ATTEND?</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
             This isn't just another conference. It's an investment in your future as a builder.
