@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import PartnerWithUs from "./pages/PartnerWithUs";
-import Admin from "./pages/Admin";
+// import Admin from "./pages/Admin";
 import "./App.css";
 
 // ScrollToTop component to handle scrolling on route change
