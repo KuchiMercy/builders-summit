@@ -9,8 +9,8 @@ const Sponsors = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
       
-        <h2 className="text-5xl md:text-7xl font-black text-dark mb-6 tracking-tighter">
-          OUR SPONSORS
+        <h2 className="text-5xl md:text-7xl font-black text-black mb-8 tracking-tighter">
+          OUR <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-500 to-black">SPONSORS</span>
         </h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-16 font-medium">
           We are proud to partner with organizations that share our vision for building a sustainable future.
