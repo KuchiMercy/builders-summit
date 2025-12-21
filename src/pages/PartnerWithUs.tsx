@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import { CheckCircle2, Send, Upload, ArrowRight, BarChart3, Users, Award, Handshake } from "lucide-react";
+import { CheckCircle2, Send, ArrowRight, BarChart3, Users, Award, Handshake } from "lucide-react";
 
 const PartnerWithUs = () => {
   const [formData, setFormData] = useState({
