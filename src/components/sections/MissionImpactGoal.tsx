@@ -1,4 +1,4 @@
-import { Target, Globe, Compass, ArrowRight } from "lucide-react";
+import { Target, Globe, Compass } from "lucide-react";
 
 const MissionImpactGoal = () => {
   return (
@@ -23,7 +23,7 @@ const MissionImpactGoal = () => {
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-5 transition-opacity">
               <Compass size={120} />
             </div>
-            
+
             <div className="relative z-10">
               <div className="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center mb-8 group-hover:bg-black group-hover:text-white transition-colors duration-500">
                 <Compass size={32} />
@@ -32,9 +32,6 @@ const MissionImpactGoal = () => {
               <p className="text-gray-400 group-hover:text-gray-600 leading-relaxed text-lg mb-8 transition-colors">
                 To equip a new generation of leaders to build with excellence, resilience, and lasting influence.
               </p>
-              <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider group-hover:text-black transition-colors">
-                Read More <ArrowRight size={16} />
-              </div>
             </div>
           </div>
 
@@ -43,7 +40,7 @@ const MissionImpactGoal = () => {
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-5 transition-opacity">
               <Globe size={120} />
             </div>
-            
+
             <div className="relative z-10">
               <div className="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center mb-8 group-hover:bg-black group-hover:text-white transition-colors duration-500">
                 <Globe size={32} />
@@ -52,9 +49,6 @@ const MissionImpactGoal = () => {
               <p className="text-gray-400 group-hover:text-gray-600 leading-relaxed text-lg mb-8 transition-colors">
                 Creating a collaborative platform for networking, mentorship, and partnerships that transcend borders.
               </p>
-              <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider group-hover:text-black transition-colors">
-                See Results <ArrowRight size={16} />
-              </div>
             </div>
           </div>
 
@@ -63,7 +57,7 @@ const MissionImpactGoal = () => {
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-5 transition-opacity">
               <Target size={120} />
             </div>
-            
+
             <div className="relative z-10">
               <div className="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center mb-8 group-hover:bg-black group-hover:text-white transition-colors duration-500">
                 <Target size={32} />
@@ -72,9 +66,6 @@ const MissionImpactGoal = () => {
               <p className="text-gray-400 group-hover:text-gray-600 leading-relaxed text-lg mb-8 transition-colors">
                 To raise visionaries committed to building timeless structures and systems for sustainable growth.
               </p>
-              <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider group-hover:text-black transition-colors">
-                Join Us <ArrowRight size={16} />
-              </div>
             </div>
           </div>
         </div>

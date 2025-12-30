@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, MessageCircle } from "lucide-react";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ const Register = () => {
     e.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
-    
+
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
@@ -86,17 +86,17 @@ const Register = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
-         
-        <h2 className="text-5xl md:text-7xl font-black text-dark mb-6 tracking-tighter">
+
+          <h2 className="text-5xl md:text-7xl font-black text-dark mb-6 tracking-tighter">
             REGISTER NOW
           </h2>
           <p className="text-xl text-gray-600 font-medium">Secure your spot at the Visionary Builders Summit.</p>
         </div>
 
         <div className="bg-white border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
-           {/* Ticket Cutout Effect (Visual only) */}
-           <div className="absolute top-1/2 -left-3 w-6 h-6 bg-gray-50 rounded-full border-r border-gray-200"></div>
-           <div className="absolute top-1/2 -right-3 w-6 h-6 bg-gray-50 rounded-full border-l border-gray-200"></div>
+          {/* Ticket Cutout Effect (Visual only) */}
+          <div className="absolute top-1/2 -left-3 w-6 h-6 bg-gray-50 rounded-full border-r border-gray-200"></div>
+          <div className="absolute top-1/2 -right-3 w-6 h-6 bg-gray-50 rounded-full border-l border-gray-200"></div>
 
           {status === "success" ? (
             <div className="text-center py-20">
@@ -104,7 +104,28 @@ const Register = () => {
                 <CheckCircle size={48} className="text-green-600" />
               </div>
               <h3 className="text-4xl font-black text-dark mb-4">You're In!</h3>
-              <p className="text-xl text-gray-600">Your virtual pass has been confirmed. Check your email for details.</p>
+              <p className="text-xl text-gray-600 mb-8">Your virtual pass has been confirmed. Check your email for details.</p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-[#25D366] text-white rounded-xl font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg hover:transform hover:scale-105"
+                >
+                  <MessageCircle size={20} />
+                  Join WhatsApp Group
+                </a>
+                <a
+                  href="https://t.me/+bbWMiaunIjczODFk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-[#0088cc] text-white rounded-xl font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg hover:transform hover:scale-105"
+                >
+                  <Send size={20} />
+                  Join Telegram Group
+                </a>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
@@ -298,8 +319,8 @@ const Register = () => {
 
               {status === "error" && (
                 <div className="p-4 bg-red-50 text-red-600 rounded-xl border border-red-100 flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-                   <p className="font-medium">{errorMessage}</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
+                  <p className="font-medium">{errorMessage}</p>
                 </div>
               )}
 

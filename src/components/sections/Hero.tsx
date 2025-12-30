@@ -37,7 +37,7 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-xl md:text-2xl text-dark max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200 font-medium leading-relaxed drop-shadow-sm">
-          The gathering of visionary builders, innovators, and leaders shaping the future of technology and infrastructure.
+          The gathering of visionary builders, innovators, and leaders shaping the future of human capital and infrastructure.
         </p>
 
         {/* CTA Buttons */}

@@ -37,18 +37,17 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
   // If scrolled, always dark text (on white bg).
   // If not scrolled, depends on theme.
   const textColorClass = isScrolled || theme === "light" ? "text-dark" : "text-white";
-  const buttonClass = isScrolled || theme === "light" 
-    ? "bg-primary text-white hover:opacity-90" 
+  const buttonClass = isScrolled || theme === "light"
+    ? "bg-primary text-white hover:opacity-90"
     : "bg-white text-dark hover:bg-primary/10";
   // const logoBgClass = isScrolled || theme === "light" ? "bg-primary" : "bg-white";
   // const logoTextClass = isScrolled || theme === "light" ? "text-white" : "text-primary";
   const logoSrc = isScrolled || theme === "light" ? "/images/vbs-logo.png" : "/images/vbs-light.png";
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
-      }`}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -59,7 +58,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {["About", "Speakers", "FAQ"].map((item) => (
+            {["About", "Speakers", "Register", "FAQ"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -90,7 +89,7 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-dark/5 absolute w-full shadow-lg">
           <div className="px-4 py-6 space-y-4 flex flex-col">
-            {["About", "Speakers", "FAQ"].map((item) => (
+            {["About", "Speakers", "Register", "FAQ"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}

@@ -18,7 +18,7 @@ const PartnerWithUs = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    
+
     try {
       const response = await fetch('/api/partner', {
         method: 'POST',
@@ -49,15 +49,15 @@ const PartnerWithUs = () => {
   return (
     <div className="min-h-screen bg-white text-dark selection:bg-primary selection:text-white">
       <Navbar theme="dark" />
-      
+
       <main>
         {/* Hero Section - Sponsorship Deck Cover Style */}
         <section className="relative py-32 md:py-48 text-center overflow-hidden bg-dark text-white">
-           {/* Background Image with Overlay */}
+          {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
-            <img 
-              src="/images/leadership-labs.jpg" 
-              alt="Partnership Meeting" 
+            <img
+              src="/images/leadership-labs.jpg"
+              alt="Partnership Meeting"
               className="w-full h-full object-cover opacity-40"
             />
             <div className="absolute inset-0 bg-linear-to-b from-dark/80 via-dark/50 to-dark"></div>
@@ -73,8 +73,8 @@ const PartnerWithUs = () => {
             <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl mx-auto leading-relaxed mb-12">
               Join the Visionary Builders Summit as a strategic partner. Position your brand at the intersection of innovation, leadership, and sustainable growth.
             </p>
-            <button 
-              onClick={() => document.getElementById('partner-form')?.scrollIntoView({ behavior: 'smooth'})}
+            <button
+              onClick={() => document.getElementById('partner-form')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-4 bg-white text-dark rounded-full font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2 mx-auto"
             >
               Become a Partner <ArrowRight size={20} />
@@ -130,7 +130,7 @@ const PartnerWithUs = () => {
         {/* Who Should Partner - Checklist Style */}
         <section className="py-24 bg-dark text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-black opacity-30 skew-x-12 transform origin-top-right"></div>
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col lg:flex-row gap-16">
               <div className="lg:w-1/3">
@@ -143,7 +143,7 @@ const PartnerWithUs = () => {
                 </p>
                 <div className="h-1 w-20 bg-white"></div>
               </div>
-              
+
               <div className="lg:w-2/3">
                 <div className="grid grid-cols-1 gap-6">
                   {[
@@ -180,7 +180,7 @@ const PartnerWithUs = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 md:p-12 rounded-[2.5rem] border border-dark/10 shadow-2xl relative overflow-hidden">
-             
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-dark uppercase tracking-wider">Full Name</label>
@@ -261,7 +261,7 @@ const PartnerWithUs = () => {
                 ></textarea>
               </div>
 
-          
+
 
               <button
                 type="submit"
@@ -280,18 +280,18 @@ const PartnerWithUs = () => {
           <div className="max-w-4xl mx-auto px-4">
             <h3 className="text-2xl font-bold text-dark mb-4">Direct Inquiries</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <a href="mailto:visionarybuilderssummit@gmail.com" className="text-lg font-medium text-dark/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">
-                visionarybuilderssummit@gmail.com
+              <a href="mailto:contact@visionarybuilderssummit.com" className="text-lg font-medium text-dark/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">
+                contact@visionarybuilderssummit.com
               </a>
               <span className="hidden md:inline text-dark/20">|</span>
               <p className="text-lg font-medium text-dark/70">
-                +234 [Your Phone Number]
+                +234 903 755 2527
               </p>
             </div>
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

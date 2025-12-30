@@ -13,7 +13,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -36,20 +36,20 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-24 bg-white relative overflow-hidden">
-       {/* Decorative Background */}
-       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#1D1D1D_1px,transparent_1px)] bg-size-[16px_16px] opacity-5"></div>
+      {/* Decorative Background */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#1D1D1D_1px,transparent_1px)] bg-size-[16px_16px] opacity-5"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-           
+
             <h2 className="text-5xl md:text-7xl font-black text-dark mb-8 tracking-tighter">
               GET IN <span className="text-transparent bg-clip-text bg-linear-to-r from-dark/60 to-dark">TOUCH</span>
             </h2>
             <p className="text-xl text-dark/70 mb-12 font-medium leading-relaxed">
               Have questions about the summit, partnership opportunities, or just want to say hello? We'd love to hear from you.
             </p>
-            
+
             <div className="space-y-8">
               <div className="flex items-start gap-6 group">
                 <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-500">
@@ -57,12 +57,12 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-dark mb-1">Email Us</h4>
-                  <a href="mailto:visionarybuilderssummit@gmail.com" className="text-dark/70 hover:text-primary transition-colors text-lg">
-                    visionarybuilderssummit@gmail.com
+                  <a href="mailto:contact@visionarybuilderssummit.com" className="text-dark/70 hover:text-primary transition-colors text-lg">
+                    contact@visionarybuilderssummit.com
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-6 group">
                 <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-500">
                   <MapPin size={24} />
@@ -78,8 +78,8 @@ const Contact = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-dark/5 shadow-2xl relative">
-             {/* Abstract Shape */}
-             <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+            {/* Abstract Shape */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl -z-10"></div>
 
             <div className="space-y-6">
               <div>

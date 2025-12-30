@@ -79,7 +79,10 @@ export const emailTemplates = {
               <div style="background: #eef2ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4f46e5;">
                 <h3 style="margin-top: 0; color: #4f46e5;">Join the Conversation 💬</h3>
                 <p>Connect with other builders before the summit starts!</p>
-                <a href="https://chat.whatsapp.com/PLACEHOLDER" style="display: inline-block; padding: 10px 20px; background: #4f46e5; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Join Our Community Group</a>
+                <div style="margin-top: 15px;">
+                  <a href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M" style="display: inline-block; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; margin-bottom: 10px;">Join WhatsApp Group</a>
+                  <a href="https://t.me/+bbWMiaunIjczODFk" style="display: inline-block; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 10px;">Join Telegram Group</a>
+                </div>
               </div>
 
               <p>If you have any questions, feel free to reach out to us at <a href="mailto:visionarybuilderssummit@gmail.com">visionarybuilderssummit@gmail.com</a></p>
