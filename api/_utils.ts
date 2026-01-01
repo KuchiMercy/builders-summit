@@ -5,6 +5,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 // Initialize Resend
 export const resend = new Resend(process.env.RESEND_API_KEY);
 
+// here
 // Initialize Firebase Admin
 if (!getApps().length) {
   initializeApp({
