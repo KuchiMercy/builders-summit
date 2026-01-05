@@ -16,13 +16,35 @@ const Sponsors = () => {
           We are proud to partner with organizations that share our vision for building a sustainable future.
         </p>
 
-        {/* Sponsor Grid Placeholder */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="aspect-video bg-gray-100 rounded-3xl flex items-center justify-center">
-              <span className="text-gray-400 font-bold text-xl">LOGO {i}</span>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-16 items-center">
+          {[
+            {
+              name: "Falytom",
+              logo: "/images/falytom.png",
+              link: "https://falytom.com.ng/"
+            }
+          ].map((sponsor, index) => (
+            <a
+              key={index}
+              href={sponsor.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="aspect-video bg-white rounded-3xl flex items-center justify-center p-0 overflow-hidden border border-gray-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300 group grayscale hover:grayscale-0"
+            >
+              <img
+                src={sponsor.logo}
+                alt={sponsor.name}
+                className="w-full h-full object-cover opacity-70 transition-opacity transform "
+              />
+            </a>
           ))}
+
+          {/* Placeholders for other sponsors */}
+          {/* {[1, 2, 3].map((i) => (
+            <div key={`placeholder-${i}`} className="aspect-video bg-gray-50 rounded-3xl flex items-center justify-center border border-dashed border-gray-200">
+              <span className="text-gray-300 font-bold text-sm">SPONSOR SLOT</span>
+            </div>
+          ))} */}
         </div>
 
         <div className="flex justify-center">
