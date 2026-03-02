@@ -30,43 +30,58 @@ const Speakers = () => {
 
         {/* Keynote Speaker - Featured */}
         <div className="mb-24 relative">
-          <div className="group relative rounded-[3rem] p-8 md:p-12 overflow-hidden">
-            {/* Abstract Shapes */}
-            {/* <div className="absolute top-0 right-0 w-96 h-96 bg-gray-800 rounded-full blur-[100px] opacity-50 pointer-events-none"></div> */}
-
+          <div className="group relative bg-primary/5 rounded-[3rem] p-8 md:p-12 overflow-hidden border border-dark/5">
             <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
               <div className="w-full md:w-1/2">
-                <div className="aspect-4/5 rounded-4xl bg-dark overflow-hidden relative shadow-2xl border border-dark/20">
+                <div className="aspect-4/5 rounded-4xl bg-dark overflow-hidden relative shadow-2xl">
                   {/* Placeholder for Keynote Image */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-dark">
-                    <User size={120} className="text-dark/40" />
+                  <div className="w-full md:w-full">
+                    <div className="aspect-4/5 rounded-4xl bg-white overflow-hidden relative shadow-xl border border-dark/5">
+                      {/* Placeholder for Convener Image */}
+                      <img src="/images/ada.png" alt="ada" />
+                      <div className="absolute bottom-6 left-6">
+                        <span className="px-4 py-2 bg-white text-primary text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                          Keynote Speaker
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="absolute bottom-6 left-6">
-                    <span className="px-4 py-2 bg-white text-primary text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                      Keynote Speaker
-                    </span>
-                  </div>
+
                 </div>
               </div>
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h3 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter">
-                  To Be Announced
+                  Ada Nduka Oyom
                 </h3>
                 <p className="text-2xl text-dark/60 mb-8 font-medium">
-                  Visionary Leader & Industry Pioneer
+                  Founder & Executive Director <br /> She Code Africa
                 </p>
                 <p className="text-lg text-dark mb-10 leading-relaxed max-w-lg mx-auto md:mx-0">
-                  Stay tuned for the reveal of our headline speaker. This
-                  individual represents the pinnacle of visionary building and
-                  sustainable innovation.
+                  Ada Nduka Oyom is the Founder & Executive Director of She Code Africa,
+                  a pan-African nonprofit driving programs that have equipped over 65,000 women in tech across Africa.
+                  With over 10 years of ecosystem-building experience, she's also the Co-Founder of Open Source Community Africa. Her transformative work has earned her prestigious recognitions from organizations like Forbes (30 Under 50), the African Union, Google, and UNICEF Nigeria.
                 </p>
                 <div className="flex gap-4 justify-center md:justify-start">
-                  <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-dark transition-all cursor-pointer">
-                    <Linkedin size={24} />
-                  </div>
-                  <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-dark transition-all cursor-pointer">
-                    <Twitter size={24} />
-                  </div>
+                  <a
+                    href="https://www.linkedin.com/in/ada-nduka-oyom/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-dark transition-all cursor-pointer">
+                      <Linkedin size={24} />
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://x.com/kolokodess"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-dark transition-all cursor-pointer">
+                      <Twitter size={24} />
+                    </div>
+                  </a>
+
                 </div>
               </div>
             </div>
@@ -108,17 +123,19 @@ const Speakers = () => {
                     href="https://www.youtube.com/@OfficialMercyDuru"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-14 h-14 rounded-full bg-white border border-dark/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer shadow-sm"
                   >
-                    <Youtube size={24} />
+                    <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-dark transition-all cursor-pointer">
+                      <Youtube size={24} />
+                    </div>
                   </a>
                   <a
                     href="https://www.instagram.com/mercyduru_?igsh=MTFxZGl4bmlkNnRvYg%3D%3D&utm_source=qr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-14 h-14 rounded-full bg-white border border-dark/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer shadow-sm"
                   >
-                    <Instagram size={24} />
+                    <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-dark transition-all cursor-pointer">
+                      <Instagram size={24} />
+                    </div>
                   </a>
                 </div>
               </div>
