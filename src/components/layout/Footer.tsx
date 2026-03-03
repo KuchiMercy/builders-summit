@@ -45,7 +45,10 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/30 text-sm font-medium">
           <p>&copy; {new Date().getFullYear()} Visionary Builders Summit. All rights reserved.</p>
-          <p>Designed for Visionaries.</p>
+          <div className="flex gap-6">
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <p>Designed for Visionaries.</p>
+          </div>
         </div>
       </div>
     </footer>

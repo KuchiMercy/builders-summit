@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import PartnerWithUs from "./pages/PartnerWithUs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import "./App.css";
 
 // ScrollToTop component to handle scrolling on route change
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/partner-with-us" element={<PartnerWithUs />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );

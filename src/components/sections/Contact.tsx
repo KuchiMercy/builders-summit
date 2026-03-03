@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Send, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -114,6 +115,12 @@ const Contact = () => {
                   className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg resize-none"
                   placeholder="How can we help?"
                 ></textarea>
+              </div>
+              <div className="text-sm text-dark/50">
+                By submitting, you agree to our{" "}
+                <Link to="/privacy-policy" target="_blank" className="text-primary font-bold hover:underline">
+                  Privacy Policy
+                </Link>.
               </div>
               <button
                 type="submit"
