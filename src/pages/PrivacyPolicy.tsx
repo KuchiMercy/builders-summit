@@ -1,6 +1,6 @@
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import { ArrowLeft, Shield, Lock, Eye, FileText } from "lucide-react";
+import { ArrowLeft, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
@@ -20,10 +20,7 @@ const PrivacyPolicy = () => {
 
                     <div className="bg-white rounded-[2.5rem] p-8 md:p-16 shadow-xl border border-gray-100">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                                <Shield size={32} />
-                            </div>
-                            <h1 className="text-4xl md:text-5xl font-black text-dark tracking-tighter">
+                            <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tighter leading-none">
                                 PRIVACY POLICY
                             </h1>
                         </div>
@@ -35,8 +32,7 @@ const PrivacyPolicy = () => {
 
                             <section className="mb-12">
                                 <div className="flex items-center gap-3 mb-4 text-dark">
-                                    <Eye size={24} className="text-primary" />
-                                    <h2 className="text-2xl font-bold m-0 uppercase tracking-tight">1. Information We Collect</h2>
+                                    <h2 className="text-3xl font-black text-dark tracking-tighter uppercase">1. Information We Collect</h2>
                                 </div>
                                 <p>
                                     We collect information that you provide directly to us when you register for the Visionary Builders Summit,
@@ -60,8 +56,7 @@ const PrivacyPolicy = () => {
 
                             <section className="mb-12">
                                 <div className="flex items-center gap-3 mb-4 text-dark">
-                                    <Lock size={24} className="text-primary" />
-                                    <h2 className="text-2xl font-bold m-0 uppercase tracking-tight">2. How We Use Your Data</h2>
+                                    <h2 className="text-3xl font-black text-dark tracking-tighter uppercase">2. How We Use Your Data</h2>
                                 </div>
                                 <p>
                                     Your information is used solely for purposes related to the Visionary Builders Summit, including:
@@ -86,8 +81,7 @@ const PrivacyPolicy = () => {
 
                             <section className="mb-12">
                                 <div className="flex items-center gap-3 mb-4 text-dark">
-                                    <Shield size={24} className="text-primary" />
-                                    <h2 className="text-2xl font-bold m-0 uppercase tracking-tight">3. Data Sharing and Third Parties</h2>
+                                    <h2 className="text-3xl font-black text-dark tracking-tighter uppercase">3. Data Sharing and Third Parties</h2>
                                 </div>
                                 <p>
                                     We do not sell your personal data. We only share information with service providers as necessary to provide our services.
