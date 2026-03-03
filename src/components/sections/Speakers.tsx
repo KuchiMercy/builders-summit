@@ -1,8 +1,6 @@
 import {
-  User,
   Linkedin,
   Twitter,
-  // ArrowRight,
   Youtube,
   Instagram,
 } from "lucide-react";
