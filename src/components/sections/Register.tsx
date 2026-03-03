@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Send, CheckCircle, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -323,6 +324,13 @@ const Register = () => {
                   <p className="font-medium">{errorMessage}</p>
                 </div>
               )}
+
+              <div className="text-center text-gray-500 text-sm">
+                By clicking "Complete Registration", you agree to our{" "}
+                <Link to="/privacy-policy" target="_blank" className="text-primary font-bold hover:underline">
+                  Privacy Policy
+                </Link>.
+              </div>
 
               <button
                 type="submit"

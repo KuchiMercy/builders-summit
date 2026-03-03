@@ -86,7 +86,7 @@ export const emailTemplates = {
                 </div>
               </div>
 
-              <p>If you have any questions, feel free to reach out to us at <a href="mailto:visionarybuilderssummit@gmail.com">visionarybuilderssummit@gmail.com</a></p>
+              <p>If you have any questions, feel free to reach out to us at <a href="mailto:contact@visionarybuilderssummit.com">contact@visionarybuilderssummit.com</a></p>
 
               <p>See you at the summit!</p>
               <p><strong>The Visionary Builders Team</strong></p>
@@ -174,7 +174,7 @@ export const emailTemplates = {
                 <p>${data.message}</p>
               </div>
 
-              <p>We typically respond within 24-48 hours. If your inquiry is urgent, please feel free to reach out to us directly at <a href="mailto:visionarybuilderssummit@gmail.com">visionarybuilderssummit@gmail.com</a></p>
+              <p>We typically respond within 24-48 hours. If your inquiry is urgent, please feel free to reach out to us directly at <a href="mailto:contact@visionarybuilderssummit.com">contact@visionarybuilderssummit.com</a></p>
 
               <p>Best regards,<br><strong>The Visionary Builders Team</strong></p>
             </div>
@@ -258,7 +258,7 @@ export const emailTemplates = {
                 <li>We'll schedule a call to discuss opportunities</li>
               </ul>
 
-              <p>In the meantime, if you have any questions, please reach out to us at <a href="mailto:visionarybuilderssummit@gmail.com">visionarybuilderssummit@gmail.com</a></p>
+              <p>In the meantime, if you have any questions, please reach out to us at <a href="mailto:contact@visionarybuilderssummit.com">contact@visionarybuilderssummit.com</a></p>
 
               <p>Looking forward to building something great together!</p>
               <p><strong>The Visionary Builders Team</strong></p>

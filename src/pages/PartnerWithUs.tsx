@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { CheckCircle2, Send, ArrowRight, BarChart3, Users, Award, Handshake } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PartnerWithUs = () => {
   const [formData, setFormData] = useState({
@@ -262,6 +263,13 @@ const PartnerWithUs = () => {
               </div>
 
 
+
+              <div className="text-center text-dark/50 text-sm">
+                By submitting interest, you agree to our{" "}
+                <Link to="/privacy-policy" target="_blank" className="text-primary font-bold hover:underline">
+                  Privacy Policy
+                </Link>.
+              </div>
 
               <button
                 type="submit"
