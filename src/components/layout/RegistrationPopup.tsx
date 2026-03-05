@@ -5,30 +5,22 @@ const RegistrationPopup = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        console.log("RegistrationPopup: Component mounted");
         // Check if the popup has been shown this session
-        // const hasSeenPopup = sessionStorage.getItem("hasSeenRegistrationPopup");
-
-        // Debug: Always show for now
-        const hasSeenPopup = false;
+        const hasSeenPopup = sessionStorage.getItem("hasSeenRegistrationPopup");
 
         if (!hasSeenPopup) {
-            console.log("RegistrationPopup: Timer starting (2s)");
             // Show popup after 2 seconds
             const timer = setTimeout(() => {
-                console.log("RegistrationPopup: Setting isOpen to true");
                 setIsOpen(true);
             }, 2000);
 
             return () => clearTimeout(timer);
-        } else {
-            console.log("RegistrationPopup: Already seen this session");
         }
     }, []);
 
     const closePopup = () => {
         setIsOpen(false);
-        // sessionStorage.setItem("hasSeenRegistrationPopup", "true");
+        sessionStorage.setItem("hasSeenRegistrationPopup", "true");
     };
 
     const handleRegisterClick = () => {
@@ -42,7 +34,7 @@ const RegistrationPopup = () => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
             {/* Backdrop click dismiss */}
             <div className="absolute inset-0" onClick={closePopup}></div>
 
