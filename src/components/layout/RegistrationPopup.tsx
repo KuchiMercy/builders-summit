@@ -5,22 +5,30 @@ const RegistrationPopup = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
+        console.log("RegistrationPopup: Component mounted");
         // Check if the popup has been shown this session
-        const hasSeenPopup = sessionStorage.getItem("hasSeenRegistrationPopup");
+        // const hasSeenPopup = sessionStorage.getItem("hasSeenRegistrationPopup");
+
+        // Debug: Always show for now
+        const hasSeenPopup = false;
 
         if (!hasSeenPopup) {
+            console.log("RegistrationPopup: Timer starting (2s)");
             // Show popup after 2 seconds
             const timer = setTimeout(() => {
+                console.log("RegistrationPopup: Setting isOpen to true");
                 setIsOpen(true);
             }, 2000);
 
             return () => clearTimeout(timer);
+        } else {
+            console.log("RegistrationPopup: Already seen this session");
         }
     }, []);
 
     const closePopup = () => {
         setIsOpen(false);
-        sessionStorage.setItem("hasSeenRegistrationPopup", "true");
+        // sessionStorage.setItem("hasSeenRegistrationPopup", "true");
     };
 
     const handleRegisterClick = () => {
@@ -75,13 +83,6 @@ const RegistrationPopup = () => {
                     >
                         <span className="z-10 tracking-wider uppercase">Register Now</span>
                         <ArrowRight size={20} className="z-10 group-hover:translate-x-1 transition-transform" />
-                    </button>
-
-                    <button
-                        onClick={closePopup}
-                        className="mt-4 text-sm font-bold text-gray-400 hover:text-dark uppercase tracking-widest transition-colors"
-                    >
-                        Maybe Later
                     </button>
                 </div>
             </div>
