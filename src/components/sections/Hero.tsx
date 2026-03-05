@@ -9,9 +9,9 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0 h-full">
-        <img 
-          src="/images/conference.jpg" 
-          alt="Modern Architecture" 
+        <img
+          src="/images/conference.jpg"
+          alt="Modern Architecture"
           className="w-full h-full object-cover"
         />
         {/* Premium Overlay - Adjusted for better readability */}
@@ -19,7 +19,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center h-full pt-20">
-        
+
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white mb-8 animate-fade-in-up shadow-xl hover:scale-105 transition-transform cursor-default">
           <span className="text-xs font-bold tracking-widest uppercase">
@@ -49,15 +49,15 @@ const Hero = () => {
             Register Now
             <ArrowRight size={20} />
           </button>
-          <button 
-             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth'})}
-             className="w-full sm:w-auto px-10 py-5 bg-white text-dark border border-dark/10 rounded-full font-bold text-lg hover:bg-primary/5 transition-all shadow-lg hover:shadow-xl"
+          <button
+            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            className="w-full sm:w-auto px-10 py-5 bg-white text-dark border border-dark/10 rounded-full font-bold text-lg hover:bg-primary/5 transition-all shadow-lg hover:shadow-xl"
           >
             Learn More
           </button>
         </div>
 
-      
+
       </div>
     </section>
   );

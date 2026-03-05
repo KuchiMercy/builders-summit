@@ -1,5 +1,6 @@
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import RegistrationPopup from "../components/layout/RegistrationPopup";
 import Hero from "../components/sections/Hero";
 import EventDetails from "../components/sections/EventDetails";
 import WhatToExpect from "../components/sections/WhatToExpect";
@@ -17,6 +18,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white text-black selection:bg-blue-100">
       <Navbar />
+      <RegistrationPopup />
       <main>
         <Hero />
         <EventDetails />
