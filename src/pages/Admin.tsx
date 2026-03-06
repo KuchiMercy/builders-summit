@@ -23,10 +23,10 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-primary/5 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden border border-dark/5">
-        
+
         {/* Header */}
 
-        
+
         <div className="bg-dark text-white p-6 text-center">
           <ShieldCheck className="w-12 h-12 mx-auto mb-3 text-white/20" />
           <h1 className="text-2xl font-bold tracking-tight">Admin Portal</h1>
@@ -65,12 +65,12 @@ const Admin = () => {
               </button>
             </form>
           ) : (
-            <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4">
+            <div className="space-y-4 animate-in">
               <div className="text-center mb-6">
-                 <p className="text-green-600 font-medium flex items-center justify-center gap-2 bg-green-50 py-2 rounded-lg">
-                    <ShieldCheck className="w-4 h-4" />
-                    Secure Session Active
-                 </p>
+                <p className="text-green-600 font-medium flex items-center justify-center gap-2 bg-green-50 py-2 rounded-lg">
+                  <ShieldCheck className="w-4 h-4" />
+                  Secure Session Active
+                </p>
               </div>
 
               <button
@@ -78,13 +78,13 @@ const Admin = () => {
                 className="w-full flex items-center justify-between p-4 bg-primary/5 hover:bg-primary/10 border border-dark/10 rounded-xl transition-all group"
               >
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                        <Download className="w-5 h-5" />
-                    </div>
-                    <div className="text-left">
-                        <p className="font-bold text-dark">Registrations</p>
-                        <p className="text-xs text-dark/50">Download CSV</p>
-                    </div>
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <Download className="w-5 h-5" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold text-dark">Registrations</p>
+                    <p className="text-xs text-dark/50">Download CSV</p>
+                  </div>
                 </div>
                 <div className="text-dark/40 group-hover:text-dark transition-colors">→</div>
               </button>
@@ -94,13 +94,13 @@ const Admin = () => {
                 className="w-full flex items-center justify-between p-4 bg-primary/5 hover:bg-primary/10 border border-dark/10 rounded-xl transition-all group"
               >
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                        <Download className="w-5 h-5" />
-                    </div>
-                    <div className="text-left">
-                        <p className="font-bold text-dark">Contact Messages</p>
-                        <p className="text-xs text-dark/50">Download CSV</p>
-                    </div>
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <Download className="w-5 h-5" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold text-dark">Contact Messages</p>
+                    <p className="text-xs text-dark/50">Download CSV</p>
+                  </div>
                 </div>
                 <div className="text-dark/40 group-hover:text-dark transition-colors">→</div>
               </button>
@@ -110,18 +110,18 @@ const Admin = () => {
                 className="w-full flex items-center justify-between p-4 bg-primary/5 hover:bg-primary/10 border border-dark/10 rounded-xl transition-all group"
               >
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                        <Download className="w-5 h-5" />
-                    </div>
-                    <div className="text-left">
-                        <p className="font-bold text-gray-900">Partnerships</p>
-                        <p className="text-xs text-gray-500">Download CSV</p>
-                    </div>
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <Download className="w-5 h-5" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold text-gray-900">Partnerships</p>
+                    <p className="text-xs text-gray-500">Download CSV</p>
+                  </div>
                 </div>
                 <div className="text-gray-400 group-hover:text-black transition-colors">→</div>
               </button>
 
-               <button
+              <button
                 onClick={() => { setIsAuthenticated(false); setKey(''); }}
                 className="w-full text-center text-gray-400 text-sm hover:text-gray-600 mt-4"
               >
