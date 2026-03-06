@@ -34,12 +34,12 @@ const RegistrationPopup = () => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in duration-300">
             {/* Backdrop click dismiss */}
             <div className="absolute inset-0" onClick={closePopup}></div>
 
             {/* Dialog content */}
-            <div className="relative bg-white w-full max-w-lg rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-500">
+            <div className="relative bg-white w-full max-w-lg rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden animate-zoom-in duration-500">
                 {/* Decorative Background Element */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-400/20 rounded-full blur-3xl -ml-16 -mb-16"></div>
