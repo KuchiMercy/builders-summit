@@ -1,4 +1,5 @@
 import { db, resend, emailTemplates, ADMIN_EMAIL, FROM_EMAIL } from './_utils.js';
+console.log('[DEBUG] register.ts loaded. resend is:', typeof resend);
 import { FieldValue } from 'firebase-admin/firestore';
 
 export default async function handler(req: any, res: any) {
@@ -7,6 +8,9 @@ export default async function handler(req: any, res: any) {
   }
 
   // Debug: Check if critical env vars are present (do not log values)
+  console.log('[DEBUG] handler start. process.env.RESEND_API_KEY present:', !!process.env.RESEND_API_KEY);
+  console.log('[DEBUG] process.env.VITE_FIREBASE_PROJECT_ID:', process.env.VITE_FIREBASE_PROJECT_ID);
+
   const envStatus = {
     resendKey: !!process.env.RESEND_API_KEY,
     firebaseProject: !!process.env.VITE_FIREBASE_PROJECT_ID,
@@ -18,7 +22,7 @@ export default async function handler(req: any, res: any) {
   try {
     const data = req.body;
     let step = 'init';
-    
+
     // Check for duplicate email
     step = 'firebase_check_duplicate';
     const existing = await db.collection('registrations')
@@ -69,8 +73,8 @@ export default async function handler(req: any, res: any) {
     return res.status(200).json({ success: true, id: docRef.id });
   } catch (error: any) {
     console.error('Registration Error:', error);
-    return res.status(500).json({ 
-      error: error.message, 
+    return res.status(500).json({
+      error: error.message,
       step: error.step || 'unknown',
       envStatus,
       // Include stack in dev/debug only, but useful here
