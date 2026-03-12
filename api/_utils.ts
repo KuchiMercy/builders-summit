@@ -1,20 +1,86 @@
 import { Resend } from 'resend';
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Log current directory and files to debug path issues
+console.log('[DEBUG] __dirname (ESM):', __dirname);
+console.log('[DEBUG] process.cwd():', process.cwd());
+try {
+  // Try multiple locations for .env.local
+  const possiblePaths = [
+    path.resolve(process.cwd(), '.env.local'),
+    path.resolve(__dirname, '../.env.local'),
+    path.resolve(__dirname, '.env.local')
+  ];
+
+  let found = false;
+  for (const envPath of possiblePaths) {
+    console.log('[DEBUG] Checking for .env.local at:', envPath);
+    if (fs.existsSync(envPath)) {
+      console.log('[DEBUG] .env.local FOUND at:', envPath);
+      dotenv.config({ path: envPath });
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    console.error('[DEBUG] .env.local NOT FOUND in any expected locations');
+  }
+} catch (e: any) {
+  console.error('[DEBUG] Error checking paths:', e.message);
+}
+
+// console.log('[DEBUG] Available env keys:', Object.keys(process.env).filter(k => k.includes('FIREBASE') || k.includes('RESEND')));
 
 // Initialize Resend
-export const resend = new Resend(process.env.RESEND_API_KEY);
+let resendInstance: Resend | null = null;
+export const resend = new Proxy({} as Resend, {
+  get(_, prop) {
+    if (!resendInstance) {
+      const apiKey = process.env.RESEND_API_KEY;
+      if (!apiKey) {
+        throw new Error('Missing RESEND_API_KEY. Please ensure it is set in your environment variables.');
+      }
+      resendInstance = new Resend(apiKey);
+    }
+    return (resendInstance as any)[prop];
+  }
+});
 
 // here
 // Initialize Firebase Admin
 if (!getApps().length) {
-  initializeApp({
-    credential: cert({
-      projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    }),
-  });
+  const projectId = process.env.VITE_FIREBASE_PROJECT_ID;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+
+  if (!projectId || !clientEmail || !privateKey) {
+    const missing = [];
+    if (!projectId) missing.push('VITE_FIREBASE_PROJECT_ID');
+    if (!clientEmail) missing.push('FIREBASE_CLIENT_EMAIL');
+    if (!privateKey) missing.push('FIREBASE_PRIVATE_KEY');
+
+    console.warn(`[WARNING] Firebase Admin initialization delayed/failed due to missing: ${missing.join(', ')}`);
+    // Note: This will cause db access to fail later, but prevents startup crash
+  } else {
+    initializeApp({
+      credential: cert({
+        projectId,
+        clientEmail,
+        privateKey: privateKey.includes('\\n')
+          ? privateKey.replace(/\\n/g, '\n')
+          : privateKey.replace(/\n\s*/g, '\n'), // Standardize multi-line
+      }),
+    });
+  }
 }
 
 export const db = getFirestore();
