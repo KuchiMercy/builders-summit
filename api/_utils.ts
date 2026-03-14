@@ -12,30 +12,19 @@ const __dirname = path.dirname(__filename);
 // Log current directory and files to debug path issues
 console.log('[DEBUG] __dirname (ESM):', __dirname);
 console.log('[DEBUG] process.cwd():', process.cwd());
-try {
-  // Try multiple locations for .env.local
-  const possiblePaths = [
-    path.resolve(process.cwd(), '.env.local'),
-    path.resolve(__dirname, '../.env.local'),
-    path.resolve(__dirname, '.env.local')
-  ];
+// Try multiple locations for .env.local
+const possiblePaths = [
+  path.resolve(process.cwd(), '.env.local'),
+  path.resolve(__dirname, '../.env.local'),
+  path.resolve(__dirname, '.env.local')
+];
 
-  let found = false;
-  for (const envPath of possiblePaths) {
-    console.log('[DEBUG] Checking for .env.local at:', envPath);
-    if (fs.existsSync(envPath)) {
-      console.log('[DEBUG] .env.local FOUND at:', envPath);
-      dotenv.config({ path: envPath });
-      found = true;
-      break;
-    }
+for (const envPath of possiblePaths) {
+  if (fs.existsSync(envPath)) {
+    console.log('[DEBUG] .env.local FOUND at:', envPath);
+    dotenv.config({ path: envPath });
+    break;
   }
-
-  if (!found) {
-    console.error('[DEBUG] .env.local NOT FOUND in any expected locations');
-  }
-} catch (e: any) {
-  console.error('[DEBUG] Error checking paths:', e.message);
 }
 
 // console.log('[DEBUG] Available env keys:', Object.keys(process.env).filter(k => k.includes('FIREBASE') || k.includes('RESEND')));
