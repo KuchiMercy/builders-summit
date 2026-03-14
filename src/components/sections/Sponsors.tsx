@@ -16,8 +16,13 @@ const Sponsors = () => {
           We are proud to partner with organizations that share our vision for building a sustainable future.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-8 mb-16 items-center">
+        <div className="flex flex-row justify-center items-center gap-12 md:gap-16 mb-16">
           {[
+            {
+              name: "SmcDao",
+              logo: "/images/smcdao.jpeg",
+              link: "https://smcdao.com/"
+            },
             {
               name: "Falytom",
               logo: "/images/falytom.png",
@@ -26,30 +31,24 @@ const Sponsors = () => {
             {
               name: "Kinplus",
               logo: "/images/kinplus.png",
-              link: "https://kinplus.com.ng/"
+              link: "https://www.kinplusgroup.com/"
             },
+
           ].map((sponsor, index) => (
             <a
               key={index}
               href={sponsor.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-72 h-40 bg-white rounded-3xl flex items-center justify-center overflow-hidden hover:shadow-xl transition-all duration-300"
+              className="flex items-center justify-center transition-transform hover:scale-105"
             >
               <img
                 src={sponsor.logo}
                 alt={sponsor.name}
-                className="h-16 w-auto object-contain opacity-70"
+                className="h-56 w-56 object-contain"
               />
             </a>
           ))}
-
-          {/* Placeholders for other sponsors */}
-          {/* {[1, 2, 3].map((i) => (
-            <div key={`placeholder-${i}`} className="aspect-video bg-gray-50 rounded-3xl flex items-center justify-center border border-dashed border-gray-200">
-              <span className="text-gray-300 font-bold text-sm">SPONSOR SLOT</span>
-            </div>
-          ))} */}
         </div>
 
         <div className="flex justify-center">
