@@ -16,25 +16,30 @@ const Sponsors = () => {
           We are proud to partner with organizations that share our vision for building a sustainable future.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-16 items-center">
+        <div className="flex flex-wrap justify-center gap-8 mb-16 items-center">
           {[
             {
               name: "Falytom",
               logo: "/images/falytom.png",
               link: "https://falytom.com.ng/"
-            }
+            },
+            {
+              name: "Kinplus",
+              logo: "/images/kinplus.png",
+              link: "https://kinplus.com.ng/"
+            },
           ].map((sponsor, index) => (
             <a
               key={index}
               href={sponsor.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="aspect-video bg-white rounded-3xl flex items-center justify-center p-0 overflow-hidden border border-gray-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300 group grayscale hover:grayscale-0"
+              className="w-72 h-40 bg-white rounded-3xl flex items-center justify-center overflow-hidden hover:shadow-xl transition-all duration-300"
             >
               <img
                 src={sponsor.logo}
                 alt={sponsor.name}
-                className="w-full h-full object-cover opacity-70 transition-opacity transform "
+                className="h-16 w-auto object-contain opacity-70"
               />
             </a>
           ))}
