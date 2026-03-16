@@ -382,7 +382,7 @@ export const emailTemplates = {
           <div class="container">
             <div class="header">
               <h1>🚀 48 Hours to Go!</h1>
-              <p>Get Ready for the Visionary Builders Summit</p>
+              <p>Visionary Builders Summit</p>
             </div>
             <div class="content">
               <h2>Hi ${data.firstName},</h2>
@@ -390,9 +390,9 @@ export const emailTemplates = {
               
               <h3>Quick Checklist:</h3>
               <ul>
-                <li>✅ Check your email for your unique entry QR code (coming tomorrow)</li>
-                <li>✅ Review the <a href="https://visionarybuilderssummit.com/#schedule">event schedule</a></li>
-                <li>✅ Prepare your questions for our speakers</li>
+                <li>Check your email for your unique entry link (coming tomorrow)</li>
+                <li>Review the <a href="https://www.canva.com/design/DAHEACkU_Wk/L82o6Y9PYsb4kfmU-bELcQ/view?utm_content=DAHEACkU_Wk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha8c408aa8a">event schedule</a></li>
+                <li>Prepare your questions for our speakers</li>
               </ul>
 
               <p>We can't wait to see you there!</p>
@@ -429,16 +429,19 @@ export const emailTemplates = {
               <p>The wait is almost over. Tomorrow is the day!</p>
               
               <div class="location-box">
-                <p><strong>📍 Venue:</strong> The Summit Center, 123 Innovation Drive</p>
-                <p><strong>⏰ Registration Starts:</strong> 8:30 AM</p>
-                <p><strong>🔑 Event Starts:</strong> 9:30 AM Sharp</p>
+                <p><strong>📍 Venue:</strong> <a href="https://www.youtube.com/watch?v=Zv60d1-UyIg">YouTube Live Stream</a></p>
+                <p><strong>⏰ Check-in Starts:</strong> 10:50 AM</p>
+                <p><strong>🔑 Event Starts:</strong> 11:00 AM Prompt</p>
               </div>
 
-              <h3>Arrival Tips:</h3>
+              <h3>Tips:</h3>
               <ul>
-                <li>Have your ID ready at registration</li>
-                <li>Arrive early to network and grab coffee</li>
-                <li>Dress code is Business Casual</li>
+                <li>Review the <a href="https://www.canva.com/design/DAHEACkU_Wk/L82o6Y9PYsb4kfmU-bELcQ/view?utm_content=DAHEACkU_Wk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha8c408aa8a">event schedule</a></li>
+                <li>Log in a few minutes early to confirm your connection</li>
+                <li>Secure your space</li>
+                <li>Eliminate all distractions</li>
+                <li>Ensure strong internet connection and stable power</li>
+                <li>Have a pad or note to write down strategies</li>
               </ul>
 
               <p>See you in the morning!</p>
@@ -478,20 +481,30 @@ export const emailTemplates = {
               
               <div class="time-box">
                 <h3 style="margin-top: 0; color: #F78628;">⏰ EVENT STARTS IN A FEW HOURS</h3>
-                <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">9:30 AM Sharp</p>
-                <p style="margin: 0; opacity: 0.9;">Registration opens at 8:30 AM</p>
+                <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">11:00 AM Prompt</p>
+                <p style="margin: 0; opacity: 0.9;">Check-in starts at 10:50 AM</p>
               </div>
 
               <div class="highlight-box">
                 <h3 style="margin-top: 0; color: #1D1D1D;">📍 Event Details</h3>
-                <p><strong>Venue:</strong> The Summit Center, 123 Innovation Drive</p>
-                <p><strong>Registration:</strong> 8:30 AM - 9:30 AM</p>
-                <p><strong>Opening Session:</strong> 9:30 AM</p>
-                <p><strong>Dress Code:</strong> Business Casual</p>
+                <p><strong>Venue:</strong> <a href="https://www.youtube.com/watch?v=Zv60d1-UyIg">YouTube Live Stream</a></p>
+                <p><strong>Stream Starts:</strong> 11:00 AM</p>
+                <p><strong>Event Schedule:</strong> <a href="https://www.canva.com/design/DAHEACkU_Wk/L82o6Y9PYsb4kfmU-bELcQ/view?utm_content=DAHEACkU_Wk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha8c408aa8a">Review Here</a></p>
               </div>
 
+              <p>The value of what is shared today depends entirely on your presence.</p>
+              <ul>
+                <li>Log in a few minutes early to confirm your connection</li>
+                <li>Secure your space</li>
+                <li>Eliminate all distractions</li>
+                <li>Ensure strong internet connection and stable power</li>
+                <li>Have a pad or note to write down strategies</li>
+              </ul>
+
+              <p>Commit to the process. We begin shortly.</p>
+
               <div style="background: #fff3e6; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #F78628;">
-                <p style="margin: 0; font-size: 16px;"><strong>💡 Pro Tip:</strong> The best connections happen during breaks and networking sessions. Don't be shy—introduce yourself!</p>
+                <p style="margin: 0; font-size: 16px;"><strong>💡 Pro Tip:</strong> The best events happen with audience engagement. Don't be shy, use the comment section!</p>
               </div>
 
               <p style="font-size: 18px; margin-top: 30px;">We're so excited to see you today. Let's make this summit unforgettable!</p>
