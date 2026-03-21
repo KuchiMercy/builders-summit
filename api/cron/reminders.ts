@@ -1,4 +1,5 @@
 import { db, resend, emailTemplates, FROM_EMAIL, ADMIN_EMAIL } from '../_utils.js';
+import { FieldValue } from 'firebase-admin/firestore';
 
 // Set your event date here (YYYY-MM-DD format)
 const EVENT_DATE = new Date('2026-03-28T09:00:00Z');
@@ -23,6 +24,7 @@ export default async function handler(req: any, res: any) {
     let templateToUse = emailTemplates.reminder48h; // Default for daily check
     let emailSubject = `${diffDays} Days until Event - System Check`;
     let isReminderDay = false;
+    let reminderKey = '';
 
     // Check for 48 hours (2 days)
     if (diffDays === 2) {
@@ -30,6 +32,7 @@ export default async function handler(req: any, res: any) {
       templateToUse = emailTemplates.reminder48h;
       emailSubject = "48h Reminder";
       isReminderDay = true;
+      reminderKey = 'reminder_48h';
     }
     // Check for 24 hours (1 day)
     else if (diffDays === 1) {
@@ -37,6 +40,7 @@ export default async function handler(req: any, res: any) {
       templateToUse = emailTemplates.reminder24h;
       emailSubject = "24h Reminder";
       isReminderDay = true;
+      reminderKey = 'reminder_24h';
     }
     // Check for morning of event (0 days)
     else if (diffDays === 0) {
@@ -44,54 +48,16 @@ export default async function handler(req: any, res: any) {
       templateToUse = emailTemplates.reminderMorning;
       emailSubject = "Morning-of-Event Reminder";
       isReminderDay = true;
+      reminderKey = 'reminder_morning';
     }
     else {
       console.log(`[CRON] No user reminder today (${diffDays} days left). Sending status to Admin.`);
     }
 
     let sentCount = 0;
-    const adminData = { firstName: 'Admin', lastName: 'User', organization: 'Visionary Builders', role: 'Staff' };
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    const [adminBase, adminDomain] = ADMIN_EMAIL.split('@');
 
-    // Send previews to Admin (Always run daily)
-    if (isReminderDay) {
-      try {
-        await resend.emails.send({
-          from: FROM_EMAIL,
-          to: `${adminBase}+preview@${adminDomain}`,
-          ...templateToUse(adminData),
-          subject: `[ADMIN PREVIEW] ${emailSubject}`
-        });
-        console.log(`[CRON] Sent ${emailSubject} preview to Admin`);
-      } catch (err) {
-        console.error(`[CRON] Failed to send preview to Admin:`, err);
-      }
-    } else {
-      // Daily check: Send all three previews sequentially with delay to verify rate limiting
-      const previews = [
-        { template: emailTemplates.reminder48h, label: '48h Reminder', suffix: '48h' },
-        { template: emailTemplates.reminder24h, label: '24h Reminder', suffix: '24h' },
-        { template: emailTemplates.reminderMorning, label: 'Morning-of-Event Reminder', suffix: 'morning' }
-      ];
-
-      for (const { template, label, suffix } of previews) {
-        try {
-          await resend.emails.send({
-            from: FROM_EMAIL,
-            to: `${adminBase}+${suffix}@${adminDomain}`,
-            ...template(adminData),
-            subject: `[DAILY CHECK] ${label} (${diffDays} days left)`
-          });
-          console.log(`[CRON] Sent ${label} preview to Admin (${suffix})`);
-          // 500ms delay to verify/respect rate limits
-          await sleep(500);
-        } catch (err) {
-          console.error(`[CRON] Failed to send ${label} preview to Admin:`, err);
-        }
-      }
-    }
-
+    // (Admin preview functionality has been removed)
     if (!isReminderDay) {
       return res.status(200).json({
         success: true,
@@ -110,19 +76,47 @@ export default async function handler(req: any, res: any) {
     for (const doc of snapshot.docs) {
       const data = doc.data();
       if (data.email && data.firstName) {
-        try {
-          await resend.emails.send({
-            from: FROM_EMAIL,
-            to: data.email,
-            ...templateToUse(data)
-          });
-          console.log(`[CRON] Sent ${emailSubject} to ${data.email}`);
-          sentCount++;
+        // Skip if this specific reminder was already sent
+        const remindersSent = data.remindersSent || [];
+        if (remindersSent.includes(reminderKey)) {
+          console.log(`[CRON] ${reminderKey} already sent to ${data.email}, skipping.`);
+          continue;
+        }
 
-          // 500ms delay to respect Resend rate limits (2 per second)
-          await sleep(500);
-        } catch (err) {
-          console.error(`[CRON] Failed to send to ${data.email}:`, err);
+        let success = false;
+        let attempts = 0;
+        const maxAttempts = 3;
+
+        while (!success && attempts < maxAttempts) {
+          try {
+            await resend.emails.send({
+              from: FROM_EMAIL,
+              to: data.email,
+              ...templateToUse(data)
+            });
+            
+            // Mark as sent in Firestore
+            await doc.ref.update({
+              remindersSent: FieldValue.arrayUnion(reminderKey)
+            });
+
+            console.log(`[CRON] Sent ${emailSubject} to ${data.email}`);
+            sentCount++;
+            success = true;
+
+            // 500ms delay to respect Resend rate limits
+            await sleep(500);
+          } catch (err) {
+            attempts++;
+            console.error(`[CRON] Attempt ${attempts} failed for ${data.email}:`, err);
+            
+            if (attempts >= maxAttempts) {
+              console.error(`[CRON] Giving up on ${data.email} after ${maxAttempts} attempts.`);
+            } else {
+              // Exponential backoff
+              await sleep(1000 * attempts);
+            }
+          }
         }
       }
     }

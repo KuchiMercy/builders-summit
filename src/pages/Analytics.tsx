@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Users, UserCheck, UserX, Loader2, ShieldAlert, ChevronLeft, ChevronRight, TrendingUp, List } from "lucide-react";
+import { Users, UserCheck, Loader2, ShieldAlert, ChevronLeft, ChevronRight, TrendingUp, List, Share2, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
     XAxis,
@@ -8,7 +8,9 @@ import {
     ResponsiveContainer,
     AreaChart,
     Area,
-    Tooltip
+    Tooltip,
+    BarChart,
+    Bar
 } from 'recharts';
 import {
     format,
@@ -27,6 +29,7 @@ interface Registrant {
     role: string;
     email: string;
     goals: string;
+    source?: string;
     timestamp: {
         _seconds: number;
         _nanoseconds: number;
@@ -52,6 +55,7 @@ const Analytics = () => {
     // UI State
     const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState('');
     const itemsPerPage = 10;
 
     const handleLogin = (e: React.FormEvent) => {
@@ -140,9 +144,35 @@ const Analytics = () => {
         });
     }, [data, timeFilter]);
 
+    // Compute Source Data based on filteredRegistrants
+    const sourceData = useMemo(() => {
+        const sourceCounts: Record<string, number> = {};
+        filteredRegistrants.forEach(r => {
+            const source = r.source || "Tix Africa";
+            sourceCounts[source] = (sourceCounts[source] || 0) + 1;
+        });
+
+        return Object.entries(sourceCounts)
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => b.count - a.count);
+    }, [filteredRegistrants]);
+
+    // Table search logic
+    const tableRegistrants = useMemo(() => {
+        if (!searchQuery.trim()) return filteredRegistrants;
+        const q = searchQuery.toLowerCase();
+        return filteredRegistrants.filter(r =>
+            (r.firstName?.toLowerCase() || '').includes(q) ||
+            (r.lastName?.toLowerCase() || '').includes(q) ||
+            (r.organization?.toLowerCase() || '').includes(q) ||
+            (r.email?.toLowerCase() || '').includes(q) ||
+            (r.role?.toLowerCase() || '').includes(q)
+        );
+    }, [filteredRegistrants, searchQuery]);
+
     // Pagination logic
-    const totalPages = Math.ceil(filteredRegistrants.length / itemsPerPage);
-    const paginatedRegistrants = filteredRegistrants.slice(
+    const totalPages = Math.ceil(tableRegistrants.length / itemsPerPage);
+    const paginatedRegistrants = tableRegistrants.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
@@ -263,88 +293,151 @@ const Analytics = () => {
                             {[
                                 { label: 'Total Registrants', value: data.total, icon: Users, accent: 'bg-orange-500' },
                                 { label: 'Verified Accounts', value: data.verifiedCount, icon: UserCheck, accent: 'bg-indigo-500' },
-                                { label: 'Filtered Entries', value: data.testCount, icon: UserX, accent: 'bg-neutral-500' }
+                                { label: 'Top Source', value: sourceData.length > 0 ? sourceData[0].name : "N/A", icon: Share2, accent: 'bg-green-500' }
                             ].map((stat, i) => (
-                                <div key={i} className="bg-neutral-900 border border-white/5 p-8 rounded-2xl hover:border-white/10 transition-all group overflow-hidden relative">
-                                    <div className={`absolute top-0 left-0 w-1 h-full ${stat.accent} opacity-40`} />
+                                <div key={i} className="bg-neutral-900 border border-white/5 p-8 rounded-2xl hover:border-white/10 transition-all group relative">
+                                    <div className={`absolute top-0 left-0 w-1 h-full ${stat.accent} opacity-40 rounded-l-2xl`} />
                                     <div className="flex justify-between items-start mb-6">
                                         <div className="p-3 bg-neutral-950 rounded-xl border border-white/5 group-hover:bg-neutral-800 transition-colors">
                                             <stat.icon className="w-4 h-4 text-neutral-400 group-hover:text-white transition-colors" />
                                         </div>
                                     </div>
                                     <p className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest mb-1">{stat.label}</p>
-                                    <h3 className="text-4xl font-bold tracking-tight">{stat.value.toLocaleString()}</h3>
+                                    <h3 className="text-4xl font-bold tracking-tight">
+                                        {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}
+                                    </h3>
                                 </div>
                             ))}
                         </div>
 
                         {/* Analysis Area */}
-                        <div className="bg-neutral-900 border border-white/5 p-8 lg:p-10 rounded-2xl shadow-xl">
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-                                <div className="flex items-center gap-4">
-                                    <div className="p-3 bg-neutral-950 rounded-xl border border-white/5">
-                                        <TrendingUp className="w-5 h-5 text-indigo-400" />
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            {/* Registration Velocity */}
+                            <div className="lg:col-span-2 bg-neutral-900 border border-white/5 p-8 lg:p-10 rounded-2xl shadow-xl">
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-3 bg-neutral-950 rounded-xl border border-white/5">
+                                            <TrendingUp className="w-5 h-5 text-indigo-400" />
+                                        </div>
+                                        <div>
+                                            <h2 className="text-xl font-bold mb-0.5">Registration Velocity</h2>
+                                            <p className="text-neutral-500 text-xs">New signups tracked per day</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h2 className="text-xl font-bold mb-0.5">Registration Velocity</h2>
-                                        <p className="text-neutral-500 text-xs">New signups tracked per day</p>
+
+                                    <div className="flex items-center gap-6 px-4 py-2 bg-neutral-950 rounded-xl border border-white/5">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 rounded-full bg-orange-500" />
+                                            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Growth Curve</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-6 px-4 py-2 bg-neutral-950 rounded-xl border border-white/5">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-orange-500" />
-                                        <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Growth Curve</span>
-                                    </div>
+                                <div className="h-[380px] w-full">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <AreaChart data={trendData}>
+                                            <defs>
+                                                <linearGradient id="colorDaily" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="5%" stopColor="#f97316" stopOpacity={0.15} />
+                                                    <stop offset="95%" stopColor="#f97316" stopOpacity={0} />
+                                                </linearGradient>
+                                            </defs>
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1f1f23" />
+                                            <XAxis
+                                                dataKey="name"
+                                                axisLine={false}
+                                                tickLine={false}
+                                                tick={{ fill: '#525252', fontSize: 11, fontWeight: 500 }}
+                                                dy={20}
+                                                minTickGap={50}
+                                            />
+                                            <YAxis
+                                                axisLine={false}
+                                                tickLine={false}
+                                                tick={{ fill: '#525252', fontSize: 11, fontWeight: 500 }}
+                                            />
+                                            <Tooltip
+                                                contentStyle={{
+                                                    backgroundColor: '#0a0a0c',
+                                                    borderColor: '#262626',
+                                                    borderRadius: '12px',
+                                                    fontSize: '12px',
+                                                    color: '#fff',
+                                                    padding: '12px'
+                                                }}
+                                                itemStyle={{ fontWeight: 600, color: '#f97316' }}
+                                                cursor={{ stroke: '#f97316', strokeWidth: 1 }}
+                                            />
+                                            <Area
+                                                type="monotone"
+                                                dataKey="daily"
+                                                name="Signups"
+                                                stroke="#f97316"
+                                                strokeWidth={2.5}
+                                                fillOpacity={1}
+                                                fill="url(#colorDaily)"
+                                                animationDuration={1500}
+                                            />
+                                        </AreaChart>
+                                    </ResponsiveContainer>
                                 </div>
                             </div>
 
-                            <div className="h-[380px] w-full">
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <AreaChart data={trendData}>
-                                        <defs>
-                                            <linearGradient id="colorDaily" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="5%" stopColor="#f97316" stopOpacity={0.15} />
-                                                <stop offset="95%" stopColor="#f97316" stopOpacity={0} />
-                                            </linearGradient>
-                                        </defs>
-                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1f1f23" />
-                                        <XAxis
-                                            dataKey="name"
-                                            axisLine={false}
-                                            tickLine={false}
-                                            tick={{ fill: '#525252', fontSize: 11, fontWeight: 500 }}
-                                            dy={20}
-                                        />
-                                        <YAxis
-                                            axisLine={false}
-                                            tickLine={false}
-                                            tick={{ fill: '#525252', fontSize: 11, fontWeight: 500 }}
-                                        />
-                                        <Tooltip
-                                            contentStyle={{
-                                                backgroundColor: '#0a0a0c',
-                                                borderColor: '#262626',
-                                                borderRadius: '12px',
-                                                fontSize: '12px',
-                                                color: '#fff',
-                                                padding: '12px'
-                                            }}
-                                            itemStyle={{ fontWeight: 600, color: '#f97316' }}
-                                            cursor={{ stroke: '#f97316', strokeWidth: 1 }}
-                                        />
-                                        <Area
-                                            type="monotone"
-                                            dataKey="daily"
-                                            name="Signups"
-                                            stroke="#f97316"
-                                            strokeWidth={2.5}
-                                            fillOpacity={1}
-                                            fill="url(#colorDaily)"
-                                            animationDuration={1500}
-                                        />
-                                    </AreaChart>
-                                </ResponsiveContainer>
+                            {/* Top Sources */}
+                            <div className="bg-neutral-900 border border-white/5 p-8 lg:p-10 rounded-2xl shadow-xl flex flex-col">
+                                <div className="flex items-center gap-4 mb-12">
+                                    <div className="p-3 bg-neutral-950 rounded-xl border border-white/5">
+                                        <Users className="w-5 h-5 text-indigo-400" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-xl font-bold mb-0.5">Top Sources</h2>
+                                        <p className="text-neutral-500 text-xs">Where attendees found us</p>
+                                    </div>
+                                </div>
+                                <div className="h-[380px] w-full mt-auto">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <BarChart
+                                            data={sourceData}
+                                            layout="vertical"
+                                            margin={{ top: 0, right: 20, left: 10, bottom: 0 }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#1f1f23" />
+                                            <XAxis
+                                                type="number"
+                                                axisLine={false}
+                                                tickLine={false}
+                                                tick={{ fill: '#525252', fontSize: 11, fontWeight: 500 }}
+                                            />
+                                            <YAxis
+                                                dataKey="name"
+                                                type="category"
+                                                axisLine={false}
+                                                tickLine={false}
+                                                tick={{ fill: '#a3a3a3', fontSize: 11, fontWeight: 500 }}
+                                                width={110}
+                                            />
+                                            <Tooltip
+                                                contentStyle={{
+                                                    backgroundColor: '#0a0a0c',
+                                                    borderColor: '#262626',
+                                                    borderRadius: '12px',
+                                                    fontSize: '12px',
+                                                    color: '#fff',
+                                                    padding: '12px'
+                                                }}
+                                                itemStyle={{ fontWeight: 600, color: '#f97316' }}
+                                                cursor={{ fill: '#1f1f23', opacity: 0.4 }}
+                                            />
+                                            <Bar
+                                                dataKey="count"
+                                                name="Registrants"
+                                                fill="#f97316"
+                                                radius={[0, 4, 4, 0]}
+                                                barSize={24}
+                                            />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </div>
                             </div>
                         </div>
 
@@ -361,27 +454,43 @@ const Analytics = () => {
                                     </div>
                                 </div>
 
-                                {/* Pagination Controls */}
-                                <div className="flex items-center gap-2 bg-neutral-950 p-1 rounded-xl border border-white/5">
-                                    <button
-                                        disabled={currentPage === 1}
-                                        onClick={() => { setCurrentPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                                        className="p-2 rounded-lg disabled:opacity-20 hover:bg-neutral-800 transition-all"
-                                    >
-                                        <ChevronLeft className="w-4 h-4" />
-                                    </button>
-                                    <div className="flex items-center px-3">
-                                        <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
-                                            {currentPage} <span className="mx-1.5 opacity-30">/</span> {totalPages || 1}
-                                        </span>
+                                <div className="flex items-center gap-4 w-full md:w-auto">
+                                    {/* Search Input */}
+                                    <div className="relative flex-1 md:w-64">
+                                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                            <Search className="h-4 w-4 text-neutral-500" />
+                                        </div>
+                                        <input
+                                            type="text"
+                                            value={searchQuery}
+                                            onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+                                            placeholder="Search attendees..."
+                                            className="w-full h-[42px] bg-neutral-950 border border-white/5 rounded-xl pl-10 pr-4 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 transition-all font-medium"
+                                        />
                                     </div>
-                                    <button
-                                        disabled={currentPage === totalPages || totalPages === 0}
-                                        onClick={() => { setCurrentPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                                        className="p-2 rounded-lg disabled:opacity-20 hover:bg-neutral-800 transition-all"
-                                    >
-                                        <ChevronRight className="w-4 h-4" />
-                                    </button>
+
+                                    {/* Pagination Controls */}
+                                    <div className="flex items-center gap-2 bg-neutral-950 p-1 rounded-xl border border-white/5 shrink-0">
+                                        <button
+                                            disabled={currentPage === 1}
+                                            onClick={() => { setCurrentPage(p => Math.max(1, p - 1)); }}
+                                            className="p-2 rounded-lg disabled:opacity-20 hover:bg-neutral-800 transition-all"
+                                        >
+                                            <ChevronLeft className="w-4 h-4" />
+                                        </button>
+                                        <div className="flex items-center px-3">
+                                            <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
+                                                {currentPage} <span className="mx-1.5 opacity-30">/</span> {totalPages || 1}
+                                            </span>
+                                        </div>
+                                        <button
+                                            disabled={currentPage === totalPages || totalPages === 0}
+                                            onClick={() => { setCurrentPage(p => Math.min(totalPages, p + 1)); }}
+                                            className="p-2 rounded-lg disabled:opacity-20 hover:bg-neutral-800 transition-all"
+                                        >
+                                            <ChevronRight className="w-4 h-4" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -392,6 +501,7 @@ const Analytics = () => {
                                             <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest">Full Name</th>
                                             <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest">Organization</th>
                                             <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest">Attendee Goals</th>
+                                            <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest">Source</th>
                                             <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-right">Registered</th>
                                         </tr>
                                     </thead>
@@ -418,6 +528,11 @@ const Analytics = () => {
                                                     <td className="px-8 py-6 max-w-md">
                                                         <div className="text-xs text-neutral-400 leading-relaxed bg-neutral-950/50 p-3 rounded-lg border border-white/5 group-hover:bg-neutral-950 transition-colors">
                                                             {r.goals || <span className="opacity-30 italic">No specific goals provided.</span>}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-8 py-6">
+                                                        <div className="inline-block px-3 py-1 bg-neutral-950/50 text-neutral-400 text-[10px] font-bold uppercase tracking-widest rounded-lg border border-white/5 group-hover:text-white transition-colors">
+                                                            {r.source || <span className="opacity-30">Tix Africa</span>}
                                                         </div>
                                                     </td>
                                                     <td className="px-8 py-6 text-right whitespace-nowrap">

@@ -35,6 +35,7 @@ export default async function handler(req: any, res: any) {
                 organization: r.organization,
                 role: r.role,
                 goals: r.goals,
+                source: r.source,
                 timestamp: r.timestamp
             }))
         });
