@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: 'Benzin';
   src: url('/fonts/Benzin-Bold.ttf') format('truetype');
