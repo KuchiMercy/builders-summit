@@ -16,8 +16,13 @@ const Sponsors = () => {
           We are proud to partner with organizations that share our vision for building a sustainable future.
         </p>
 
-        <div className="flex flex-row justify-center items-center gap-12 md:gap-16 mb-16">
+        <div className="flex flex-row justify-center items-center gap-4 md:gap-8 mb-16">
           {[
+            {
+              name: "Pressdia",
+              logo: "/images/pressdia.png",
+              link: "https://pressdia.com/"
+            },
             {
               name: "SmcDao",
               logo: "/images/smcdao.jpeg",
@@ -45,7 +50,7 @@ const Sponsors = () => {
               <img
                 src={sponsor.logo}
                 alt={sponsor.name}
-                className="h-56 w-56 object-contain"
+                className="h-60 w-60 object-contain"
               />
             </a>
           ))}
