@@ -8,37 +8,36 @@ const Sponsors = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px] opacity-30"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-
         <h2 className="text-5xl md:text-7xl font-black text-dark mb-6 tracking-tighter">
           OUR SPONSORS
         </h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-16 font-medium">
-          We are proud to partner with organizations that share our vision for building a sustainable future.
+          We are proud to partner with organizations that share our vision for
+          building a sustainable future.
         </p>
 
-        <div className="flex flex-row justify-center items-center gap-4 md:gap-8 mb-16">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-8 mb-16">
           {[
             {
               name: "Pressdia",
               logo: "/images/pressdia.png",
-              link: "https://pressdia.com/"
+              link: "https://pressdia.com/",
             },
             {
               name: "SmcDao",
               logo: "/images/smcdao.jpeg",
-              link: "https://smcdao.com/"
+              link: "https://smcdao.com/",
             },
             {
               name: "Falytom",
               logo: "/images/falytom.png",
-              link: "https://falytom.com.ng/"
+              link: "https://falytom.com.ng/",
             },
             {
               name: "Kinplus",
               logo: "/images/kinplus.png",
-              link: "https://www.kinplusgroup.com/"
+              link: "https://www.kinplusgroup.com/",
             },
-
           ].map((sponsor, index) => (
             <a
               key={index}
