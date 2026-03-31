@@ -23,8 +23,8 @@ export default async function handler(req: any, res: any) {
 
     console.log(`[CRON] Days since event: ${diffDays}`);
 
-    // Only send feedback reminders 2 days after the event
-    if (diffDays !== FEEDBACK_REMINDER_DELAY_DAYS) {
+    // Send feedback reminders from 2 days after the event onward
+    if (diffDays < FEEDBACK_REMINDER_DELAY_DAYS) {
       console.log(`[CRON] Not yet time for feedback reminders (${diffDays} days since event, waiting for ${FEEDBACK_REMINDER_DELAY_DAYS}).`);
       return res.status(200).json({
         success: true,
