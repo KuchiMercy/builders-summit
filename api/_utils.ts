@@ -466,7 +466,7 @@ export const emailTemplates = {
             .header { background: linear-gradient(135deg, #F78628 0%, #ff9d4d 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
             .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
             .highlight-box { background: white; padding: 25px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #F78628; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-            .time-box { background: #1D1D1D; color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; }
+            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
           </style>
         </head>
         <body>
@@ -510,6 +510,165 @@ export const emailTemplates = {
               <p style="font-size: 18px; margin-top: 30px;">We're so excited to see you today. Let's make this summit unforgettable!</p>
               <p><strong>See you in a few hours! 🚀</strong></p>
               <p><strong>The Visionary Builders Team</strong></p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `,
+  }),
+
+  // Thank You Message (Post-Event)
+  thankYou: (data: any) => ({
+    subject: "Thank You for Being Part of the Visionary Builders Summit 🚀",
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #000 0%, #333 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+            .highlight-box { background: white; padding: 25px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #000; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+            .community-box { background: #eef2ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4f46e5; }
+            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+            .button { display: inline-block; padding: 12px 25px; background: #000; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1 style="font-size: 28px; margin: 0;">Thank You for Being Part of the Visionary Builders Summit</h1>
+            </div>
+            <div class="content">
+              <h2>Dear ${data.firstName || 'Visionary Builder'},</h2>
+              
+              <p>Thank you for being a part of the <strong>Visionary Builders Summit 1.0</strong>. Your presence, engagement, and energy truly made this experience impactful and memorable.</p>
+              
+              <div class="highlight-box">
+                <p>From the powerful insights shared to your active engagement, this summit was more than just an event, it was a movement of visionaries committed to growth, purpose, and transformation. We are honoured that you chose to journey with us.</p>
+              </div>
+
+              <p>We would also like to specially appreciate our media partner, <strong>Pressdia</strong>, for their outstanding support in amplifying the vision and helping us reach a wider audience. Their contribution played a significant role in the success of this summit.</p>
+
+              <p>As we wrap up this edition, we encourage you to reflect on the lessons learned, take bold action, and continue building the vision you carry. This is only the beginning.</p>
+
+              <div class="community-box">
+                <h3 style="margin-top: 0; color: #4f46e5;">We'd Love to Hear From You 💬</h3>
+                <p>We would love to hear your feedback, key takeaways, and how this summit has impacted you. Also join the Visionary Builders Community.</p>
+                <div style="margin-top: 15px;">
+                  <a href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M" class="button" style="background: #25D366;">Join the Community</a>
+                </div>
+              </div>
+
+              <p>Thank you once again for being part of something truly special.</p>
+              
+              <p style="font-size: 18px; margin-top: 30px;"><strong>Stay connected. Stay visionary.</strong></p>
+              
+              <p>With gratitude,<br><strong>The Visionary Builders Summit Team</strong></p>
+            </div>
+            <div class="footer">
+              <p>© 2026 Visionary Builders Summit. All rights reserved.</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `,
+  }),
+  
+  // Feedback Request (Initial)
+  feedbackRequest: (data: any) => ({
+    subject: "We Value Your Feedback: Visionary Builders Summit ✍️",
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #000 0%, #333 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+            .button { display: inline-block; padding: 12px 25px; background: #000; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1 style="font-size: 28px; margin: 0;">We Value Your Voice</h1>
+            </div>
+            <div class="content">
+              <h2>Dear ${data.firstName || 'Visionary Builder'},</h2>
+              
+              <p>Thank you once again for being a part of the <strong>Visionary Builders Summit</strong>.</p>
+              
+              <p>But now, we need you to let us know how insightful, impactful, and valuable the session is to your personal and professional growth. As we continue to build and improve future editions of the summit, your feedback is incredibly important to us.</p>
+              
+              <p>Kindly take a minute to complete the feedback form using the link below:</p>
+              
+              <div style="text-align: center;">
+                <a href="https://forms.gle/oqJ34ZMahuKQMnwdA" class="button">Complete Feedback Form</a>
+              </div>
+
+              <p>Your honest insights will help us understand what worked well, what we can improve, and how we can serve you better in future experiences.</p>
+              
+              <p>Thank you for your voice, and your commitment to growth.</p>
+              
+              <p>Warm regards,<br><strong>The Visionary Builders Summit Team</strong></p>
+            </div>
+            <div class="footer">
+              <p>© 2026 Visionary Builders Summit. All rights reserved.</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `,
+  }),
+
+  // Feedback Reminder (2 Days Later)
+  feedbackReminder: (data: any) => ({
+    subject: "Quick Reminder: Share Your VBS Experience ⏳",
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #000 0%, #333 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+            .button { display: inline-block; padding: 12px 25px; background: #000; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1 style="font-size: 28px; margin: 0;">Quick Reminder</h1>
+            </div>
+            <div class="content">
+              <h2>Dear ${data.firstName || 'Visionary Builder'},</h2>
+              
+              <p>Just a quick reminder.</p>
+              
+              <p>Thank you once again for being a part of the <strong>Visionary Builders Summit</strong>. If you skipped the earlier mail or haven’t filled the form yet, we’d still love to hear from you.</p>
+              
+              <p>Your feedback helps us understand how insightful, impactful, and valuable the sessions were to your personal and professional growth. It also guides us in improving future editions of the summit to better serve you.</p>
+              
+              <p>Kindly take a minute to complete the feedback form using the link below:</p>
+              
+              <div style="text-align: center;">
+                <a href="https://forms.gle/oqJ34ZMahuKQMnwdA" class="button">Complete Feedback Form</a>
+              </div>
+
+              <p>Every response counts, and your voice truly matters to us, so let’s get this done.</p>
+              
+              <p>Thank you for your voice, and your commitment to growth.</p>
+              
+              <p>Warm regards,<br><strong>The Visionary Builders Summit Team</strong></p>
+            </div>
+            <div class="footer">
+              <p>© 2026 Visionary Builders Summit. All rights reserved.</p>
             </div>
           </div>
         </body>
