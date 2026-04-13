@@ -89,9 +89,9 @@ const Register = () => {
         <div className="text-center mb-12">
 
           <h2 className="text-5xl md:text-7xl font-black text-dark mb-6 tracking-tighter">
-            REGISTER NOW
+            JOIN THE COMMUNITY
           </h2>
-          <p className="text-xl text-gray-600 font-medium">Secure your spot at the Visionary Builders Summit.</p>
+          <p className="text-xl text-gray-600 font-medium">Become a part of the Visionary Builders Network.</p>
         </div>
 
         <div className="bg-white border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
@@ -104,8 +104,8 @@ const Register = () => {
               <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
                 <CheckCircle size={48} className="text-green-600" />
               </div>
-              <h3 className="text-4xl font-black text-dark mb-4">You're In!</h3>
-              <p className="text-xl text-gray-600 mb-8">Your virtual pass has been confirmed. Check your email for details.</p>
+              <h3 className="text-4xl font-black text-dark mb-4">Welcome to the Community!</h3>
+              <p className="text-xl text-gray-600 mb-8">Your membership request has been confirmed. Check your email for next steps.</p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -300,7 +300,7 @@ const Register = () => {
                   value={formData.goals}
                   onChange={handleChange}
                   className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg resize-none"
-                  placeholder="I want to learn about..."
+                  placeholder="How can we help you build?"
                 ></textarea>
               </div>
 
@@ -341,7 +341,7 @@ const Register = () => {
                   "Processing..."
                 ) : (
                   <>
-                    Complete Registration
+                    Join the Community
                     <Send size={20} />
                   </>
                 )}

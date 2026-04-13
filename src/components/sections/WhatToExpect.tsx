@@ -52,7 +52,7 @@ const WhatToExpect = () => {
             </h2>
           </div>
           <p className="text-xl text-gray-600 max-w-md mt-8 md:mt-0 text-right md:text-left font-medium border-l-4 border-black pl-6">
-            An immersive journey designed to equip, connect, and inspire the next generation of builders.
+            An immersive ecosystem designed to equip, connect, and inspire the next generation of builders.
           </p>
         </div>
 

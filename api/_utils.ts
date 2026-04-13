@@ -578,46 +578,44 @@ export const emailTemplates = {
   
   // Feedback Request (Initial)
   feedbackRequest: (data: any) => ({
-    subject: "We Value Your Feedback: Visionary Builders Summit ✍️",
+    subject: "Quick question about the Summit",
     html: `
       <!DOCTYPE html>
       <html>
         <head>
           <style>
-            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #000 0%, #333 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
-            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
-            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
-            .button { display: inline-block; padding: 12px 25px; background: #000; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+            body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+            .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+            .header { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
+            .content { font-size: 16px; }
+            .footer { margin-top: 40px; color: #999; font-size: 12px; border-top: 1px solid #eee; padding-top: 20px; }
+            .button { display: inline-block; padding: 12px 24px; background: #000; color: #ffffff !important; text-decoration: none; border-radius: 4px; font-weight: 500; margin: 20px 0; }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h1 style="font-size: 28px; margin: 0;">We Value Your Voice</h1>
+              <strong style="font-size: 18px;">Visionary Builders Summit</strong>
             </div>
             <div class="content">
-              <h2>Dear ${data.firstName || 'Visionary Builder'},</h2>
+              <p>Hi ${data.firstName || 'there'},</p>
               
-              <p>Thank you once again for being a part of the <strong>Visionary Builders Summit</strong>.</p>
+              <p>I'm checking in to see how you found the <strong>Visionary Builders Summit</strong> sessions. We're already looking at how we can make the next one even better for our community.</p>
               
-              <p>But now, we need you to let us know how insightful, impactful, and valuable the session is to your personal and professional growth. As we continue to build and improve future editions of the summit, your feedback is incredibly important to us.</p>
+              <p>Could you take a minute to share your thoughts? Your perspective on what was most valuable would be very helpful.</p>
               
-              <p>Kindly take a minute to complete the feedback form using the link below:</p>
+              <p>You can share your experience here:</p>
               
-              <div style="text-align: center;">
-                <a href="https://forms.gle/oqJ34ZMahuKQMnwdA" class="button">Complete Feedback Form</a>
+              <div style="text-align: left;">
+                <a href="https://forms.gle/oqJ34ZMahuKQMnwdA" class="button">Submit your thoughts</a>
               </div>
 
-              <p>Your honest insights will help us understand what worked well, what we can improve, and how we can serve you better in future experiences.</p>
+              <p>Thank you for being part of the Summit and for your time.</p>
               
-              <p>Thank you for your voice, and your commitment to growth.</p>
-              
-              <p>Warm regards,<br><strong>The Visionary Builders Summit Team</strong></p>
+              <p>Best regards,<br>The Visionary Builders Summit Team</p>
             </div>
             <div class="footer">
-              <p>© 2026 Visionary Builders Summit. All rights reserved.</p>
+              <p>© 2026 Visionary Builders Summit. You received this because you registered for the Summit.</p>
             </div>
           </div>
         </body>
@@ -627,7 +625,7 @@ export const emailTemplates = {
 
   // Feedback Reminder (2 Days Later)
   feedbackReminder: (data: any) => ({
-    subject: "Quick Reminder: Share Your VBS Experience ⏳",
+    subject: "Following up: Visionary Builders Summit",
     html: `
       <!DOCTYPE html>
       <html>
@@ -644,28 +642,22 @@ export const emailTemplates = {
         <body>
           <div class="container">
             <div class="header">
-              <h1 style="font-size: 28px; margin: 0;">Quick Reminder</h1>
+              <strong style="font-size: 18px;">Visionary Builders Summit</strong>
             </div>
             <div class="content">
-              <h2>Dear ${data.firstName || 'Visionary Builder'},</h2>
+              <p>Hi ${data.firstName || 'there'},</p>
               
-              <p>Just a quick reminder.</p>
+              <p>Just a quick note to follow up on the feedback request for the <strong>Visionary Builders Summit</strong>. We haven't heard from you yet and would really appreciate your thoughts.</p>
               
-              <p>Thank you once again for being a part of the <strong>Visionary Builders Summit</strong>. If you skipped the earlier mail or haven’t filled the form yet, we’d still love to hear from you.</p>
+              <p>Your experience helps us ensure future editions are as valuable as possible.</p>
               
-              <p>Your feedback helps us understand how insightful, impactful, and valuable the sessions were to your personal and professional growth. It also guides us in improving future editions of the summit to better serve you.</p>
-              
-              <p>Kindly take a minute to complete the feedback form using the link below:</p>
-              
-              <div style="text-align: center;">
-                <a href="https://forms.gle/oqJ34ZMahuKQMnwdA" class="button">Complete Feedback Form</a>
+              <div style="text-align: left;">
+                <a href="https://forms.gle/oqJ34ZMahuKQMnwdA" class="button">Submit your thoughts</a>
               </div>
 
-              <p>Every response counts, and your voice truly matters to us, so let’s get this done.</p>
+              <p>Every response counts and it only takes a minute.</p>
               
-              <p>Thank you for your voice, and your commitment to growth.</p>
-              
-              <p>Warm regards,<br><strong>The Visionary Builders Summit Team</strong></p>
+              <p>Thank you,<br>The Visionary Builders Summit Team</p>
             </div>
             <div class="footer">
               <p>© 2026 Visionary Builders Summit. All rights reserved.</p>
