@@ -6,24 +6,16 @@ const FAQ = () => {
 
   const faqs = [
     {
-      q: "Who should attend the Visionary Builders’ Summit?",
-      a: "The summit is designed for entrepreneurs, innovators, professionals, leaders, and students who want to build sustainable systems, expand their network, and gain visionary insights to scale their impact.",
+      q: "Who should join the Visionary Builders’ Community?",
+      a: "The community is designed for entrepreneurs, innovators, professionals, leaders, and students who want to build sustainable systems, expand their network, and gain visionary insights to scale their impact.",
     },
     {
-      q: "Is the summit in-person, virtual, or both?",
-      a: "Currently, the Visionary Builders’ Summit is a fully virtual event. During registration, you can secure your virtual attendance and will receive a secure access link before the summit. In the future, we plan to expand to hybrid or in-person formats.",
-    },
-    {
-      q: "How can I become a partner or sponsor?",
-      a: "You can partner with us by visiting the “Partner With Us” page. There, you’ll find information about partnership benefits, categories, and a form to submit your interest. Our team will reach out to discuss the best way to collaborate.",
-    },
-    {
-      q: "Will there be networking opportunities?",
-      a: "Yes! The summit is designed for meaningful connections. Attendees will have access to networking sessions, panel discussions, breakout sessions, and community groups to connect with like-minded builders and industry leaders.",
+      q: "Can I still access the 2026 Summit content?",
+      a: "Yes! By joining the community, you'll gain access to event highlights, session summaries, and key resources shared during the 2026 Summit. We will communicate any future hybrid or in-person formats through our community channels.",
     },
     {
       q: "How can I join the Visionary Builders’ community?",
-      a: "After registering, you’ll receive an invitation to join our community group via your preferred platform (WhatsApp and Telegram). This group allows you to continue networking, access resources, and engage with other attendees before, during, and after the summit.",
+      a: "Simply fill out the form in the 'Join the Community' section. After registration, you'll receive an invitation to join our platform (WhatsApp or Telegram) where you can network, access resources, and engage with other builders.",
     },
   ];
 

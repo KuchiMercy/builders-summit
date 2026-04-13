@@ -57,23 +57,23 @@ const RegistrationPopup = () => {
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary mb-6">
                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
                         <span className="text-xs font-bold tracking-widest uppercase">
-                            Registration Open
+                            Community Open
                         </span>
                     </div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-dark mb-4 tracking-tight leading-tight">
-                        Secure Your Spot Today!
+                        Join the Movement!
                     </h2>
 
                     <p className="text-gray-600 font-medium mb-8 text-lg">
-                        Join visionary builders and leaders shaping the future of human capital and infrastructure.
+                        The 2026 Summit was just the beginning. Join the community and build the future with us.
                     </p>
 
                     <button
                         onClick={handleRegisterClick}
                         className="w-full py-4 bg-primary text-white rounded-full font-bold text-lg hover:opacity-90 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shadow-xl hover:shadow-primary/30 relative overflow-hidden group border-2 border-primary/50"
                     >
-                        <span className="z-10 tracking-wider uppercase">Register Now</span>
+                        <span className="z-10 tracking-wider uppercase">Join Community</span>
                         <ArrowRight size={20} className="z-10 group-hover:translate-x-1 transition-transform" />
                     </button>
                 </div>

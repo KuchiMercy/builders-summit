@@ -33,10 +33,10 @@ const WhyAttend = () => {
         <div className="text-center mb-20">
          
             <h2 className="text-5xl md:text-7xl font-black text-light mb-6 tracking-tighter">
-            WHY ATTEND?
+            WHY JOIN?
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
-            This isn't just another conference. It's an investment in your future as a builder.
+            The summit was just the beginning. Join our network to continue building with excellence and lasting influence.
           </p>
         </div>
         
