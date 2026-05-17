@@ -42,7 +42,7 @@ const EventObjectives = () => {
                 </span>
               </h2>
               <p className="text-xl text-gray-400 leading-relaxed font-medium">
-                We are not just hosting an event; we are sparking a movement. These are the principles that guide our gathering.
+                We are not just building a community; we are sparking a movement. These are the principles that guide our network.
               </p>
             </div>
           </div>

@@ -7,9 +7,9 @@ const EventDetails = () => {
         <div className="bg-black text-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
           {/* Left Side: Date & Time */}
           <div className="p-8 md:p-12 md:w-1/3 border-b md:border-b-0 md:border-r border-gray-800 flex flex-col justify-center items-center md:items-start text-center md:text-left bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800 text-xs font-bold uppercase tracking-wider mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-800 text-xs font-bold uppercase tracking-wider mb-6">
               <Calendar size={14} />
-              Save the Date
+              Past Event
             </div>
             <h3 className="text-5xl font-black mb-2">28</h3>
             <p className="text-xl font-bold uppercase tracking-widest text-gray-400 mb-6">March 2026</p>
@@ -38,13 +38,13 @@ const EventDetails = () => {
           {/* Right Side: CTA */}
           <div className="p-8 md:p-12 md:w-1/3 flex flex-col justify-center items-center text-center bg-gray-900">
             <Ticket size={48} className="text-white mb-6 opacity-80" />
-            <h3 className="text-2xl font-bold mb-2">Secure Your Spot</h3>
-            <p className="text-gray-400 text-sm mb-8">Limited virtual seats available for the interactive sessions.</p>
+            <h3 className="text-2xl font-bold mb-2">Join Our Network</h3>
+            <p className="text-gray-400 text-sm mb-8">Access event highlights and connect with our growing community of builders.</p>
             <button 
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth'})}
               className="w-full py-4 bg-white text-black rounded-xl font-bold hover:bg-gray-200 transition-all transform hover:scale-105 active:scale-95"
             >
-              Get Free Pass
+              Join Community
             </button>
           </div>
         </div>

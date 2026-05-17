@@ -58,11 +58,26 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {["About", "Speakers", "Register", "FAQ"].map((item) => (
+            {["About", "Speakers"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className={`${textColorClass} hover:text-primary transition-all text-sm font-bold uppercase tracking-widest`}
+                className={`${textColorClass} hover:text-primary transition-all text-sm font-bold uppercase tracking-widest cursor-pointer`}
+              >
+                {item}
+              </button>
+            ))}
+            <Link
+              to="/workshop"
+              className={`${textColorClass} hover:text-primary transition-all text-sm font-bold uppercase tracking-widest`}
+            >
+              Workshop
+            </Link>
+            {["Register", "FAQ"].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className={`${textColorClass} hover:text-primary transition-all text-sm font-bold uppercase tracking-widest cursor-pointer`}
               >
                 {item}
               </button>
@@ -89,11 +104,27 @@ const Navbar = ({ theme = "light" }: NavbarProps) => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-dark/5 absolute w-full shadow-lg">
           <div className="px-4 py-6 space-y-4 flex flex-col">
-            {["About", "Speakers", "Register", "FAQ"].map((item) => (
+            {["About", "Speakers"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-dark hover:text-primary text-left py-2"
+                className="text-dark hover:text-primary text-left py-2 font-bold uppercase tracking-widest text-sm cursor-pointer"
+              >
+                {item}
+              </button>
+            ))}
+            <Link
+              to="/workshop"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-dark hover:text-primary text-left py-2 font-bold uppercase tracking-widest text-sm"
+            >
+              Workshop
+            </Link>
+            {["Register", "FAQ"].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className="text-dark hover:text-primary text-left py-2 font-bold uppercase tracking-widest text-sm cursor-pointer"
               >
                 {item}
               </button>

@@ -23,7 +23,7 @@ const Hero = () => {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white mb-8 animate-fade-in-up shadow-xl hover:scale-105 transition-transform cursor-default">
           <span className="text-xs font-bold tracking-widest uppercase">
-            Summit 2026
+            Summit 2026 Concluded
           </span>
         </div>
 
@@ -37,7 +37,7 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-xl md:text-2xl text-dark max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200 font-medium leading-relaxed drop-shadow-sm">
-          The gathering of visionary builders, innovators, and leaders shaping the future of human capital and infrastructure.
+          The 2026 Visionary Builders Summit has concluded, but the journey continues. Join our growing community of visionary builders, innovators, and leaders.
         </p>
 
         {/* CTA Buttons */}
@@ -46,7 +46,7 @@ const Hero = () => {
             onClick={scrollToRegister}
             className="w-full sm:w-auto px-10 py-5 bg-primary text-white rounded-full font-bold text-lg hover:opacity-90 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 shadow-2xl hover:shadow-primary/20"
           >
-            Register Now
+            Join the Community
             <ArrowRight size={20} />
           </button>
           <button
