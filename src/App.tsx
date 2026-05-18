@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import PartnerWithUs from "./pages/PartnerWithUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Analytics from "./pages/Analytics";
+import Workshop from "./pages/Workshop";
 import "./App.css";
 
 // ScrollToTop component to handle scrolling on route change
@@ -33,6 +34,7 @@ function App() {
         <Route path="/partner-with-us" element={<PartnerWithUs />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/workshop" element={<Workshop />} />
       </Routes>
     </Router>
   );
