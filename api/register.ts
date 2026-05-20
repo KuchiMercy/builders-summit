@@ -23,9 +23,14 @@ export default async function handler(req: any, res: any) {
     const data = req.body;
     let step = 'init';
 
-    // Check for duplicate email
+    // Route to the correct Firestore collection based on registration type
+    const collection = data.registrationType === 'workshop'
+      ? 'workshopRegistrations'
+      : 'registrations';
+
+    // Check for duplicate email within the same collection
     step = 'firebase_check_duplicate';
-    const existing = await db.collection('registrations')
+    const existing = await db.collection(collection)
       .where('email', '==', data.email)
       .get();
 
@@ -35,7 +40,7 @@ export default async function handler(req: any, res: any) {
 
     // Save to Firestore
     step = 'firebase_save';
-    const docRef = await db.collection('registrations').add({
+    const docRef = await db.collection(collection).add({
       ...data,
       timestamp: FieldValue.serverTimestamp(),
     });
