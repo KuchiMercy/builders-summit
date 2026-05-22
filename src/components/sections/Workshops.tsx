@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 const Workshops = () => {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Dynamically check if the workshop is upcoming (May 29, 2026 at 12:30 PM)
-  const isUpcoming = new Date() < new Date(2026, 4, 29, 12, 30);
+  // Dynamically check if the workshop is upcoming (May 29, 2026 at 9:00 PM)
+  const isUpcoming = new Date() < new Date(2026, 4, 29, 21, 0);
 
   const workshop = {
     id: "ws-1",
-    time: "11:15 AM - 12:30 PM",
+    time: "8:00 PM - 9:00 PM",
     track: "Career & Purpose",
     title: "Must You Become an Entrepreneur to Build Something Meaningful?",
     description: "This session challenges the societal pressure surrounding entrepreneurship and explores how professionals, leaders, creators, and entrepreneurs all contribute meaningfully to society in different ways.",
@@ -20,7 +20,7 @@ const Workshops = () => {
       avatar: "/images/mercy_duru.jpg",
     },
     level: "All Levels",
-    duration: "75 Mins",
+    duration: "60 Mins",
     takeaways: [
       "Why entrepreneurship is glorified today",
       "The hidden realities of entrepreneurship",

@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 const Workshop = () => {
   const [notification, setNotification] = useState<string | null>(null);
 
-  // Dynamically check if the workshop is upcoming (May 29, 2026 at 12:30 PM)
-  const isUpcoming = new Date() < new Date(2026, 4, 29, 12, 30);
+  // Dynamically check if the workshop is upcoming (May 29, 2026 at 9:00 PM)
+  const isUpcoming = new Date() < new Date(2026, 4, 29, 21, 0);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -71,8 +71,8 @@ const Workshop = () => {
 
   const workshop = {
     title: "Must You Become an Entrepreneur to Build Something Meaningful?",
-    time: "Saturday, May 29, 2026 | 11:15 AM - 12:30 PM",
-    duration: "75 Minutes",
+    time: "Saturday, May 29, 2026 | 8:00 PM - 9:00 PM",
+    duration: "60 Minutes",
     track: "Career, Leadership & Purpose",
     level: "All Levels",
     description: "This session challenges the modern societal pressure surrounding entrepreneurship. Together, we explore how professionals, leaders, creators, and entrepreneurs all contribute uniquely and meaningfully to society helping you identify exactly where you are wired to thrive.",
@@ -115,11 +115,11 @@ const Workshop = () => {
       <Navbar theme="light" />
 
       <main className="grow pb-24 bg-gray-50/30">
-        
+
         {/* Editorial Hero Banner */}
         <div className="bg-white border-b border-gray-100 pt-36 pb-16 mb-16">
           <div className="max-w-6xl mx-auto px-6">
-            
+
             {/* Back button */}
             <Link
               to="/"
@@ -160,7 +160,7 @@ const Workshop = () => {
 
         {/* Content Container */}
         <div className="max-w-6xl mx-auto px-6">
-          
+
           <article className="space-y-16">
 
             {/* Premise / Description */}
@@ -180,7 +180,7 @@ const Workshop = () => {
                   What You'll Learn
                 </h3>
               </div>
-              
+
               <div className="bg-white border border-gray-100 rounded-3xl p-6 md:p-10 shadow-sm shadow-black/[0.01]">
                 <ol className="divide-y divide-gray-100">
                   {workshop.syllabus.map((item, idx) => (
@@ -256,19 +256,32 @@ const Workshop = () => {
 
                   {regStatus === "success" ? (
                     <div className="text-center py-20">
-                      <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+                      <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8">
                         <CheckCircle size={48} className="text-green-600" />
                       </div>
                       <h4 className="text-4xl font-black text-dark mb-4">You're registered!</h4>
-                      <p className="text-xl text-gray-600 mb-8">Your spot has been reserved. Check your email for a confirmation and event details.</p>
-                      <a
-                        href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:scale-105"
-                      >
-                        Join WhatsApp Group
-                      </a>
+                      <p className="text-xl text-gray-600 mb-4">Your spot has been reserved. Check your email for a confirmation and details.</p>
+                      <p className="text-sm text-gray-500 mb-8 font-semibold uppercase tracking-wider">
+                        Join us live on Saturday, May 29 at 8:00 PM
+                      </p>
+                      <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                        <a
+                          href="https://meet.google.com/jyb-apjt-dyu"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:scale-105 cursor-pointer text-center uppercase text-sm tracking-wider"
+                        >
+                          Google Meet Link
+                        </a>
+                        <a
+                          href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:scale-105 cursor-pointer text-center uppercase text-sm tracking-wider"
+                        >
+                          Join WhatsApp Group
+                        </a>
+                      </div>
                     </div>
                   ) : (
                     <form onSubmit={handleRegisterSubmit} className="space-y-8">
@@ -367,7 +380,7 @@ const Workshop = () => {
 
                       {regStatus === "error" && (
                         <div className="p-4 bg-red-50 text-red-600 rounded-xl border border-red-100 flex items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 shrink-0"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
                           <p className="font-medium">{regError}</p>
                         </div>
                       )}

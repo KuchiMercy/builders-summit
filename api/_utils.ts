@@ -106,7 +106,10 @@ export const emailTemplates = {
             <span class="detail-label">Facilitator:</span> Mercy Duru
           </div>
           <div class="detail-row">
-            <span class="detail-label">Time:</span> Saturday, May 29, 2026 | 11:15 AM - 12:30 PM
+            <span class="detail-label">Time:</span> Saturday, May 29, 2026 | 8:00 PM - 9:00 PM
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Meeting Link:</span> <a href="https://meet.google.com/jyb-apjt-dyu">https://meet.google.com/jyb-apjt-dyu</a>
           </div>
           <div class="detail-row">
             <span class="detail-label">Name:</span> ${data.firstName} ${data.lastName}
@@ -179,7 +182,8 @@ export const emailTemplates = {
                 <ul>
                   ${isWorkshop 
                     ? `
-                      <li>You will receive connection links and session workbook materials closer to the masterclass date.</li>
+                      <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/jyb-apjt-dyu">Google Meet</a> on Saturday at 8:00 PM.</li>
+                      <li>You will receive session workbook materials closer to the masterclass date.</li>
                       <li>Mark your calendar and set a reminder so you don't miss the live interaction.</li>
                       <li>Think about the systems you are building or operating today!</li>
                     `
@@ -736,6 +740,29 @@ export const emailTemplates = {
           </div>
         </body>
       </html>
+    `,
+  }),
+
+  // Broadcast Email Template (Bypasses Promotions tab by mimicking pure personal typed emails)
+  broadcast: (data: { firstName: string; subject: string; message: string; ctaText?: string; ctaUrl?: string }) => ({
+    subject: data.subject,
+    html: `
+      <p>Hey ${data.firstName || 'Builder'},</p>
+      
+      ${data.message.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
+      
+      ${data.ctaText && data.ctaUrl ? `
+        <p><strong>👉 ${data.ctaText}:</strong> <a href="${data.ctaUrl}">${data.ctaUrl}</a></p>
+      ` : ''}
+      
+      <p>Warmly,</p>
+      <p><strong>Mercy Duru</strong><br/>
+      The Visionary Builders Team</p>
+      
+      <p style="font-size: 11px; color: #777777; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 10px;">
+        Visionary Builders Network, Lagos, Nigeria.<br/>
+        You are receiving this because you registered for the Visionary Builders Summit. If you'd like to unsubscribe, simply reply to this email.
+      </p>
     `,
   }),
 };
