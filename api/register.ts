@@ -49,30 +49,27 @@ export default async function handler(req: any, res: any) {
     step = 'resend_user_email';
     try {
       await resend.emails.send({
-        from: FROM_EMAIL,
-        to: data.email,
+        from: `Visionary Builders <${FROM_EMAIL}>`,
+        to: [data.email],
         ...emailTemplates.registrationUser(data),
       });
+      console.log(`[SUCCESS] User confirmation email sent to ${data.email}`);
     } catch (emailError: any) {
       console.error('User Email Error:', emailError);
-      // Don't fail the whole request, but log it. 
-      // Optionally continue or throw? 
-      // For now, let's catch it so we know if this is the failure point.
-      // If we want to ensure email sends, we should rethrow.
-      throw new Error(`Failed to send user email: ${emailError.message}`);
+      // Don't fail the whole request, just log the failure to ensure excellent user experience.
     }
 
     // Send Admin Notification Email
     step = 'resend_admin_email';
     try {
       await resend.emails.send({
-        from: FROM_EMAIL,
-        to: ADMIN_EMAIL,
+        from: `Visionary Builders <${FROM_EMAIL}>`,
+        to: [ADMIN_EMAIL],
         ...emailTemplates.registrationAdmin(data),
       });
+      console.log(`[SUCCESS] Admin notification email sent to ${ADMIN_EMAIL}`);
     } catch (emailError: any) {
       console.error('Admin Email Error:', emailError);
-      // Non-critical?
     }
 
     return res.status(200).json({ success: true, id: docRef.id });

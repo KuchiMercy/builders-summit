@@ -16,18 +16,28 @@ export default async function handler(req: any, res: any) {
     });
 
     // 2. Send User Confirmation Email
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: data.email,
-      ...emailTemplates.partnerUser(data),
-    });
+    try {
+      await resend.emails.send({
+        from: `Visionary Builders <${FROM_EMAIL}>`,
+        to: [data.email],
+        ...emailTemplates.partnerUser(data),
+      });
+      console.log(`[SUCCESS] Partnership confirmation email sent to ${data.email}`);
+    } catch (emailError: any) {
+      console.error('Partnership User Email Error:', emailError);
+    }
 
     // 3. Send Admin Notification Email
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: ADMIN_EMAIL,
-      ...emailTemplates.partnerAdmin(data),
-    });
+    try {
+      await resend.emails.send({
+        from: `Visionary Builders <${FROM_EMAIL}>`,
+        to: [ADMIN_EMAIL],
+        ...emailTemplates.partnerAdmin(data),
+      });
+      console.log(`[SUCCESS] Partnership admin notification email sent to ${ADMIN_EMAIL}`);
+    } catch (emailError: any) {
+      console.error('Partnership Admin Email Error:', emailError);
+    }
 
     return res.status(200).json({ success: true, id: docRef.id });
   } catch (error: any) {
