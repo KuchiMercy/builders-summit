@@ -81,124 +81,199 @@ export const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@visionarybuilderssu
 // Email Templates
 export const emailTemplates = {
   // Registration confirmation email
-  registrationUser: (data: any) => ({
-    subject: "Welcome to Visionary Builders Summit! 🎉",
-    html: `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>
-            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #000 0%, #333 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
-            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
-            .button { display: inline-block; padding: 12px 30px; background: #000; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
-            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
-            .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
-            .detail-row { padding: 8px 0; border-bottom: 1px solid #eee; }
-            .detail-label { font-weight: bold; color: #666; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h1>🎉 You're Registered!</h1>
-              <p>Welcome to the Visionary Builders Summit</p>
-            </div>
-            <div class="content">
-              <h2>Hi ${data.firstName}!</h2>
-              <p>Thank you for registering for the <strong>Visionary Builders Summit</strong>. We're thrilled to have you join us!</p>
-              
-              <div class="details">
-                <h3>Your Registration Details:</h3>
-                <div class="detail-row">
-                  <span class="detail-label">Name:</span> ${data.firstName} ${data.lastName}
-                </div>
-                <div class="detail-row">
-                  <span class="detail-label">Email:</span> ${data.email}
-                </div>
-                <div class="detail-row">
-                  <span class="detail-label">Organization:</span> ${data.organization}
-                </div>
-                <div class="detail-row">
-                  <span class="detail-label">Role:</span> ${data.role}
-                </div>
-              </div>
-
-              <p><strong>What's Next?</strong></p>
-              <ul>
-                <li>You'll receive event details and access links closer to the date</li>
-                <li>Mark your calendar for the summit</li>
-                <li>Connect with us on social media for updates</li>
-              </ul>
-
-              <div style="background: #eef2ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4f46e5;">
-                <h3 style="margin-top: 0; color: #4f46e5;">Join the Conversation 💬</h3>
-                <p>Connect with other builders before the summit starts!</p>
-                <div style="margin-top: 15px;">
-                  <a href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M" style="display: inline-block; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; margin-bottom: 10px;">Join WhatsApp Group</a>
-                  <a href="https://t.me/+bbWMiaunIjczODFk" style="display: inline-block; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 10px;">Join Telegram Group</a>
-                </div>
-              </div>
-
-              <p>If you have any questions, feel free to reach out to us at <a href="mailto:contact@visionarybuilderssummit.com">contact@visionarybuilderssummit.com</a></p>
-
-              <p>See you at the summit!</p>
-              <p><strong>The Visionary Builders Team</strong></p>
-            </div>
-            <div class="footer">
-              <p>© 2025 Visionary Builders Summit. All rights reserved.</p>
-            </div>
+  registrationUser: (data: any) => {
+    const isWorkshop = data.registrationType === 'workshop';
+    const subject = isWorkshop
+      ? "Workshop Registration Confirmed: Must You Become an Entrepreneur? 🚀"
+      : "Welcome to Visionary Builders Summit! 🎉";
+      
+    const headerTitle = isWorkshop
+      ? "🎉 Workshop Registered!"
+      : "🎉 You're Registered!";
+      
+    const headerSub = isWorkshop
+      ? "Must You Become an Entrepreneur to Build Something Meaningful?"
+      : "Welcome to the Visionary Builders Summit";
+      
+    const detailsSection = isWorkshop
+      ? `
+        <div class="details">
+          <h3>Your Workshop Details:</h3>
+          <div class="detail-row">
+            <span class="detail-label">Topic:</span> Must You Become an Entrepreneur to Build Something Meaningful?
           </div>
-        </body>
-      </html>
-    `,
-  }),
+          <div class="detail-row">
+            <span class="detail-label">Facilitator:</span> Mercy Duru
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Time:</span> Saturday, May 29, 2026 | 8:00 PM - 9:00 PM
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Meeting Link:</span> <a href="https://meet.google.com/jyb-apjt-dyu">https://meet.google.com/jyb-apjt-dyu</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Name:</span> ${data.firstName} ${data.lastName}
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email:</span> ${data.email}
+          </div>
+          ${data.workshopQuestion ? `
+          <div class="detail-row">
+            <span class="detail-label">Your Question:</span> ${data.workshopQuestion}
+          </div>
+          ` : ''}
+        </div>
+      `
+      : `
+        <div class="details">
+          <h3>Your Registration Details:</h3>
+          <div class="detail-row">
+            <span class="detail-label">Name:</span> ${data.firstName} ${data.lastName}
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email:</span> ${data.email}
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Organization:</span> ${data.organization}
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Role:</span> ${data.role}
+          </div>
+        </div>
+      `;
+
+    const bodyText = isWorkshop
+      ? `Thank you for registering for the live masterclass <strong>"Must You Become an Entrepreneur to Build Something Meaningful?"</strong>. We are excited to have you join us for this high-impact session led by Mercy Duru.`
+      : `Thank you for registering for the <strong>Visionary Builders Summit</strong>. We're thrilled to have you join us!`;
+
+    const footerText = isWorkshop ? '© 2026 Visionary Builders Summit. All rights reserved.' : '© 2025 Visionary Builders Summit. All rights reserved.';
+
+    return {
+      subject,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: linear-gradient(135deg, #000 0%, #333 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+              .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+              .button { display: inline-block; padding: 12px 30px; background: #000; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+              .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+              .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+              .detail-row { padding: 8px 0; border-bottom: 1px solid #eee; }
+              .detail-label { font-weight: bold; color: #666; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>${headerTitle}</h1>
+                <p>${headerSub}</p>
+              </div>
+              <div class="content">
+                <h2>Hi ${data.firstName}!</h2>
+                <p>${bodyText}</p>
+                
+                ${detailsSection}
+
+                <p><strong>What's Next?</strong></p>
+                <ul>
+                  ${isWorkshop 
+                    ? `
+                      <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/jyb-apjt-dyu">Google Meet</a> on Saturday at 8:00 PM.</li>
+                      <li>You will receive session workbook materials closer to the masterclass date.</li>
+                      <li>Mark your calendar and set a reminder so you don't miss the live interaction.</li>
+                      <li>Think about the systems you are building or operating today!</li>
+                    `
+                    : `
+                      <li>You'll receive event details and access links closer to the date</li>
+                      <li>Mark your calendar for the summit</li>
+                      <li>Connect with us on social media for updates</li>
+                    `
+                  }
+                </ul>
+
+                <div style="background: #eef2ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4f46e5;">
+                  <h3 style="margin-top: 0; color: #4f46e5;">Join the Conversation 💬</h3>
+                  <p>Connect with other builders before the session starts!</p>
+                  <div style="margin-top: 15px;">
+                    <a href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M" style="display: inline-block; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; margin-bottom: 10px;">Join WhatsApp Group</a>
+                    <a href="https://t.me/+bbWMiaunIjczODFk" style="display: inline-block; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 10px;">Join Telegram Group</a>
+                  </div>
+                </div>
+
+                <p>If you have any questions, feel free to reach out to us at <a href="mailto:contact@visionarybuilderssummit.com">contact@visionarybuilderssummit.com</a></p>
+
+                <p>See you at the session!</p>
+                <p><strong>The Visionary Builders Team</strong></p>
+              </div>
+              <div class="footer">
+                <p>${footerText}</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+    };
+  },
 
   // Registration admin notification
-  registrationAdmin: (data: any) => ({
-    subject: `New Registration: ${data.firstName} ${data.lastName}`,
-    html: `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>
-            body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: #000; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-            .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 8px 8px; }
-            .data-table { width: 100%; background: white; border-radius: 8px; overflow: hidden; }
-            .data-table td { padding: 12px; border-bottom: 1px solid #eee; }
-            .data-table td:first-child { font-weight: bold; color: #666; width: 40%; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h2>🎯 New Summit Registration</h2>
+  registrationAdmin: (data: any) => {
+    const isWorkshop = data.registrationType === 'workshop';
+    const subject = isWorkshop
+      ? `New Workshop Registration: ${data.firstName} ${data.lastName}`
+      : `New Summit Registration: ${data.firstName} ${data.lastName}`;
+      
+    return {
+      subject,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: #000; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+              .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 8px 8px; }
+              .data-table { width: 100%; background: white; border-radius: 8px; overflow: hidden; }
+              .data-table td { padding: 12px; border-bottom: 1px solid #eee; }
+              .data-table td:first-child { font-weight: bold; color: #666; width: 40%; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h2>${isWorkshop ? '🎯 New Workshop Masterclass Registration' : '🎯 New Summit Registration'}</h2>
+              </div>
+              <div class="content">
+                <table class="data-table">
+                  <tr><td>Name</td><td>${data.firstName} ${data.lastName}</td></tr>
+                  <tr><td>Email</td><td>${data.email}</td></tr>
+                  <tr><td>Phone</td><td>${data.phone}</td></tr>
+                  <tr><td>Organization</td><td>${data.organization}</td></tr>
+                  <tr><td>Role</td><td>${data.role}</td></tr>
+                  ${isWorkshop ? `
+                    <tr><td>Workshop Question</td><td>${data.workshopQuestion || 'N/A'}</td></tr>
+                  ` : `
+                    <tr><td>LinkedIn</td><td>${data.linkedin || 'N/A'}</td></tr>
+                    <tr><td>Location</td><td>${data.cityCountry}</td></tr>
+                    <tr><td>Industry</td><td>${data.industry}</td></tr>
+                    <tr><td>Experience</td><td>${data.experience || 'N/A'}</td></tr>
+                    <tr><td>Source</td><td>${data.source || 'N/A'}</td></tr>
+                    <tr><td>Goals</td><td>${data.goals || 'N/A'}</td></tr>
+                    <tr><td>Join Community</td><td>${data.community ? 'Yes' : 'No'}</td></tr>
+                  `}
+                  <tr><td>Registered At</td><td>${new Date().toLocaleString()}</td></tr>
+                </table>
+              </div>
             </div>
-            <div class="content">
-              <table class="data-table">
-                <tr><td>Name</td><td>${data.firstName} ${data.lastName}</td></tr>
-                <tr><td>Email</td><td>${data.email}</td></tr>
-                <tr><td>Phone</td><td>${data.phone}</td></tr>
-                <tr><td>LinkedIn</td><td>${data.linkedin || 'N/A'}</td></tr>
-                <tr><td>Location</td><td>${data.cityCountry}</td></tr>
-                <tr><td>Organization</td><td>${data.organization}</td></tr>
-                <tr><td>Role</td><td>${data.role}</td></tr>
-                <tr><td>Industry</td><td>${data.industry}</td></tr>
-                <tr><td>Experience</td><td>${data.experience || 'N/A'}</td></tr>
-                <tr><td>Source</td><td>${data.source || 'N/A'}</td></tr>
-                <tr><td>Goals</td><td>${data.goals || 'N/A'}</td></tr>
-                <tr><td>Join Community</td><td>${data.community ? 'Yes' : 'No'}</td></tr>
-                <tr><td>Registered At</td><td>${new Date().toLocaleString()}</td></tr>
-              </table>
-            </div>
-          </div>
-        </body>
-      </html>
-    `,
-  }),
+          </body>
+        </html>
+      `,
+    };
+  },
 
   // Contact form user confirmation
   contactUser: (data: any) => ({
@@ -665,6 +740,29 @@ export const emailTemplates = {
           </div>
         </body>
       </html>
+    `,
+  }),
+
+  // Broadcast Email Template (Bypasses Promotions tab by mimicking pure personal typed emails)
+  broadcast: (data: { firstName: string; subject: string; message: string; ctaText?: string; ctaUrl?: string }) => ({
+    subject: data.subject,
+    html: `
+      <p>Hey ${data.firstName || 'Builder'},</p>
+      
+      ${data.message.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
+      
+      ${data.ctaText && data.ctaUrl ? `
+        <p><strong>👉 ${data.ctaText}:</strong> <a href="${data.ctaUrl}">${data.ctaUrl}</a></p>
+      ` : ''}
+      
+      <p>Warmly,</p>
+      <p><strong>Mercy Duru</strong><br/>
+      The Visionary Builders Team</p>
+      
+      <p style="font-size: 11px; color: #777777; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 10px;">
+        Visionary Builders Network, Lagos, Nigeria.<br/>
+        You are receiving this because you registered for the Visionary Builders Summit. If you'd like to unsubscribe, simply reply to this email.
+      </p>
     `,
   }),
 };

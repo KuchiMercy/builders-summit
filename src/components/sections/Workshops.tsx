@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Clock, BookOpen, Play, FileText, Sparkles, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Workshops = () => {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Dynamically check if the workshop is upcoming (May 29, 2026 at 9:00 PM)
+  const isUpcoming = new Date() < new Date(2026, 4, 29, 21, 0);
+
   const workshop = {
     id: "ws-1",
-    time: "11:15 AM - 12:30 PM",
+    time: "8:00 PM - 9:00 PM",
     track: "Career & Purpose",
     title: "Must You Become an Entrepreneur to Build Something Meaningful?",
     description: "This session challenges the societal pressure surrounding entrepreneurship and explores how professionals, leaders, creators, and entrepreneurs all contribute meaningfully to society in different ways.",
@@ -16,7 +20,7 @@ const Workshops = () => {
       avatar: "/images/mercy_duru.jpg",
     },
     level: "All Levels",
-    duration: "75 Mins",
+    duration: "60 Mins",
     takeaways: [
       "Why entrepreneurship is glorified today",
       "The hidden realities of entrepreneurship",
@@ -140,31 +144,54 @@ const Workshops = () => {
 
               {/* Status Action / Materials */}
               <div className="pt-8 border-t border-gray-100 flex flex-col gap-6">
-                <div>
-                  <h5 className="text-sm font-black text-dark uppercase tracking-wider mb-2">
-                    Session Resources
-                  </h5>
-                  <p className="text-xs text-dark/50 font-medium leading-relaxed">
-                    The 2026 Summit has concluded. As an attendee or community member, you can access the archived recordings and session slide decks below.
-                  </p>
-                </div>
+                {isUpcoming ? (
+                  <>
+                    <div>
+                      <h5 className="text-sm font-black text-dark uppercase tracking-wider mb-2">
+                        Live Interactive Masterclass
+                      </h5>
+                      <p className="text-xs text-dark/50 font-medium leading-relaxed">
+                        Reserve your free ticket now. Join Mercy Duru live to discover if you must become an entrepreneur to build something meaningful, or how to thrive as an intrapreneur and leader.
+                      </p>
+                    </div>
+                    <div>
+                      <Link
+                        to="/workshop"
+                        className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-primary text-white hover:bg-dark transition-all duration-300 rounded-2xl font-bold text-sm tracking-wide transform active:scale-95 shadow-md shadow-primary/20 text-center uppercase cursor-pointer"
+                      >
+                        Register for Masterclass
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <h5 className="text-sm font-black text-dark uppercase tracking-wider mb-2">
+                        Session Resources
+                      </h5>
+                      <p className="text-xs text-dark/50 font-medium leading-relaxed">
+                        The 2026 Summit has concluded. As an attendee or community member, you can access the archived recordings and session slide decks below.
+                      </p>
+                    </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <button
-                    onClick={() => triggerToast("The workshop recording video is currently being processed and will be available soon!")}
-                    className="flex items-center justify-center gap-2 px-6 py-4 bg-dark text-white hover:bg-primary transition-all duration-300 rounded-2xl font-bold text-sm tracking-wide transform active:scale-95 shadow-md shadow-dark/10 cursor-pointer"
-                  >
-                    <Play size={16} />
-                    Watch Recording
-                  </button>
-                  <button
-                    onClick={() => triggerToast("The slide deck is currently loading. Please check back in a few moments!")}
-                    className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-dark hover:bg-gray-200 transition-all duration-300 rounded-2xl font-bold text-sm tracking-wide transform active:scale-95 border border-gray-200 cursor-pointer"
-                  >
-                    <FileText size={16} />
-                    Download Slides
-                  </button>
-                </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <button
+                        onClick={() => triggerToast("The workshop recording video is currently being processed and will be available soon!")}
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-dark text-white hover:bg-primary transition-all duration-300 rounded-2xl font-bold text-sm tracking-wide transform active:scale-95 shadow-md shadow-dark/10 cursor-pointer"
+                      >
+                        <Play size={16} />
+                        Watch Recording
+                      </button>
+                      <button
+                        onClick={() => triggerToast("The slide deck is currently loading. Please check back in a few moments!")}
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-dark hover:bg-gray-200 transition-all duration-300 rounded-2xl font-bold text-sm tracking-wide transform active:scale-95 border border-gray-200 cursor-pointer"
+                      >
+                        <FileText size={16} />
+                        Download Slides
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
