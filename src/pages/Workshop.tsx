@@ -71,7 +71,7 @@ const Workshop = () => {
 
   const workshop = {
     title: "Must You Become an Entrepreneur to Build Something Meaningful?",
-    time: "Saturday, May 29, 2026 | 8:00 PM - 9:00 PM",
+    time: "Friday, May 29, 2026 | 8:00 PM - 9:00 PM",
     duration: "60 Minutes",
     track: "Career, Leadership & Purpose",
     level: "All Levels",
@@ -262,11 +262,11 @@ const Workshop = () => {
                       <h4 className="text-4xl font-black text-dark mb-4">You're registered!</h4>
                       <p className="text-xl text-gray-600 mb-4">Your spot has been reserved. Check your email for a confirmation and details.</p>
                       <p className="text-sm text-gray-500 mb-8 font-semibold uppercase tracking-wider">
-                        Join us live on Saturday, May 29 at 8:00 PM
+                        Join us live on Friday, May 29 at 8:00 PM
                       </p>
                       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                         <a
-                          href="https://meet.google.com/jyb-apjt-dyu"
+                          href="https://meet.google.com/ciu-qqko-qpk"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:scale-105 cursor-pointer text-center uppercase text-sm tracking-wider"

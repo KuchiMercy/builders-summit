@@ -106,10 +106,10 @@ export const emailTemplates = {
             <span class="detail-label">Facilitator:</span> Mercy Duru
           </div>
           <div class="detail-row">
-            <span class="detail-label">Time:</span> Saturday, May 29, 2026 | 8:00 PM - 9:00 PM
+            <span class="detail-label">Time:</span> Friday, May 29, 2026 | 8:00 PM - 9:00 PM
           </div>
           <div class="detail-row">
-            <span class="detail-label">Meeting Link:</span> <a href="https://meet.google.com/jyb-apjt-dyu">https://meet.google.com/jyb-apjt-dyu</a>
+            <span class="detail-label">Meeting Link:</span> <a href="https://meet.google.com/ciu-qqko-qpk">https://meet.google.com/ciu-qqko-qpk</a>
           </div>
           <div class="detail-row">
             <span class="detail-label">Name:</span> ${data.firstName} ${data.lastName}
@@ -182,7 +182,7 @@ export const emailTemplates = {
                 <ul>
                   ${isWorkshop 
                     ? `
-                      <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/jyb-apjt-dyu">Google Meet</a> on Saturday at 8:00 PM.</li>
+                      <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/ciu-qqko-qpk">Google Meet</a> on Friday at 8:00 PM.</li>
                       <li>You will receive session workbook materials closer to the masterclass date.</li>
                       <li>Mark your calendar and set a reminder so you don't miss the live interaction.</li>
                       <li>Think about the systems you are building or operating today!</li>
