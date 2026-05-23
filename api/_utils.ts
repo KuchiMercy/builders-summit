@@ -86,15 +86,15 @@ export const emailTemplates = {
     const subject = isWorkshop
       ? "Workshop Registration Confirmed: Must You Become an Entrepreneur? 🚀"
       : "Welcome to Visionary Builders Summit! 🎉";
-      
+
     const headerTitle = isWorkshop
       ? "🎉 Workshop Registered!"
       : "🎉 You're Registered!";
-      
+
     const headerSub = isWorkshop
       ? "Must You Become an Entrepreneur to Build Something Meaningful?"
       : "Welcome to the Visionary Builders Summit";
-      
+
     const detailsSection = isWorkshop
       ? `
         <div class="details">
@@ -180,19 +180,19 @@ export const emailTemplates = {
 
                 <p><strong>What's Next?</strong></p>
                 <ul>
-                  ${isWorkshop 
-                    ? `
+                  ${isWorkshop
+          ? `
                       <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/ciu-qqko-qpk">Google Meet</a> on Friday at 8:00 PM.</li>
                       <li>You will receive session workbook materials closer to the masterclass date.</li>
                       <li>Mark your calendar and set a reminder so you don't miss the live interaction.</li>
                       <li>Think about the systems you are building or operating today!</li>
                     `
-                    : `
+          : `
                       <li>You'll receive event details and access links closer to the date</li>
                       <li>Mark your calendar for the summit</li>
                       <li>Connect with us on social media for updates</li>
                     `
-                  }
+        }
                 </ul>
 
                 <div style="background: #eef2ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4f46e5;">
@@ -200,7 +200,6 @@ export const emailTemplates = {
                   <p>Connect with other builders before the session starts!</p>
                   <div style="margin-top: 15px;">
                     <a href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M" style="display: inline-block; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; margin-bottom: 10px;">Join WhatsApp Group</a>
-                    <a href="https://t.me/+bbWMiaunIjczODFk" style="display: inline-block; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 10px;">Join Telegram Group</a>
                   </div>
                 </div>
 
@@ -225,7 +224,7 @@ export const emailTemplates = {
     const subject = isWorkshop
       ? `New Workshop Registration: ${data.firstName} ${data.lastName}`
       : `New Summit Registration: ${data.firstName} ${data.lastName}`;
-      
+
     return {
       subject,
       html: `
@@ -650,7 +649,7 @@ export const emailTemplates = {
       </html>
     `,
   }),
-  
+
   // Feedback Request (Initial)
   feedbackRequest: (data: any) => ({
     subject: "Quick question about the Summit",
