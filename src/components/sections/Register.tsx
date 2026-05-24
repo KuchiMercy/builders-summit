@@ -117,7 +117,7 @@ const Register = () => {
                   <MessageCircle size={20} />
                   Join WhatsApp Group
                 </a>
-                <a
+                {/* <a
                   href="https://t.me/+bbWMiaunIjczODFk"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -125,7 +125,7 @@ const Register = () => {
                 >
                   <Send size={20} />
                   Join Telegram Group
-                </a>
+                </a> */}
               </div>
             </div>
           ) : (

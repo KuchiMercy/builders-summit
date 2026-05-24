@@ -209,7 +209,7 @@ const Workshop = () => {
                   Facilitator
                 </h2>
                 <h3 className="text-2xl font-black text-black uppercase tracking-tight">
-                  Meet the Masterclass Leader
+                  Meet the Workshop Leader
                 </h3>
               </div>
 
@@ -244,13 +244,13 @@ const Workshop = () => {
 
                   <div className="space-y-2 mb-8">
                     <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400">
-                      Register for Masterclass
+                      Register for Workshop
                     </h2>
                     <h3 className="text-3xl md:text-4xl font-black text-dark uppercase leading-snug tracking-tighter">
                       Secure Your Seat
                     </h3>
                     <p className="text-gray-600 font-medium pt-1">
-                      Reserve your spot for this live interactive masterclass with Mercy Duru. Space is limited.
+                      Reserve your spot for this live interactive workshop with Mercy Duru.
                     </p>
                   </div>
 

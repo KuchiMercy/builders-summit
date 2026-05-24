@@ -86,15 +86,15 @@ export const emailTemplates = {
     const subject = isWorkshop
       ? "Workshop Registration Confirmed: Must You Become an Entrepreneur? 🚀"
       : "Welcome to Visionary Builders Summit! 🎉";
-      
+
     const headerTitle = isWorkshop
       ? "🎉 Workshop Registered!"
       : "🎉 You're Registered!";
-      
+
     const headerSub = isWorkshop
       ? "Must You Become an Entrepreneur to Build Something Meaningful?"
       : "Welcome to the Visionary Builders Summit";
-      
+
     const detailsSection = isWorkshop
       ? `
         <div class="details">
@@ -143,7 +143,7 @@ export const emailTemplates = {
       `;
 
     const bodyText = isWorkshop
-      ? `Thank you for registering for the live masterclass <strong>"Must You Become an Entrepreneur to Build Something Meaningful?"</strong>. We are excited to have you join us for this high-impact session led by Mercy Duru.`
+      ? `Thank you for registering for the live workshop <strong>"Must You Become an Entrepreneur to Build Something Meaningful?"</strong>. We are excited to have you join us for this high-impact session led by Mercy Duru.`
       : `Thank you for registering for the <strong>Visionary Builders Summit</strong>. We're thrilled to have you join us!`;
 
     const footerText = isWorkshop ? '© 2026 Visionary Builders Summit. All rights reserved.' : '© 2025 Visionary Builders Summit. All rights reserved.';
@@ -174,25 +174,25 @@ export const emailTemplates = {
               </div>
               <div class="content">
                 <h2>Hi ${data.firstName}!</h2>
+                ${isWorkshop ? `<div style="text-align: center; margin: 20px 0;"><img src="https://visionarybuilderssummit.com/images/workshop1_poster.jpeg" alt="Workshop Poster" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>` : ''}
                 <p>${bodyText}</p>
                 
                 ${detailsSection}
 
                 <p><strong>What's Next?</strong></p>
                 <ul>
-                  ${isWorkshop 
-                    ? `
+                  ${isWorkshop
+          ? `
                       <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/ciu-qqko-qpk">Google Meet</a> on Friday at 8:00 PM.</li>
-                      <li>You will receive session workbook materials closer to the masterclass date.</li>
                       <li>Mark your calendar and set a reminder so you don't miss the live interaction.</li>
                       <li>Think about the systems you are building or operating today!</li>
                     `
-                    : `
+          : `
                       <li>You'll receive event details and access links closer to the date</li>
                       <li>Mark your calendar for the summit</li>
                       <li>Connect with us on social media for updates</li>
                     `
-                  }
+        }
                 </ul>
 
                 <div style="background: #eef2ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4f46e5;">
@@ -200,7 +200,6 @@ export const emailTemplates = {
                   <p>Connect with other builders before the session starts!</p>
                   <div style="margin-top: 15px;">
                     <a href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M" style="display: inline-block; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; margin-bottom: 10px;">Join WhatsApp Group</a>
-                    <a href="https://t.me/+bbWMiaunIjczODFk" style="display: inline-block; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 10px;">Join Telegram Group</a>
                   </div>
                 </div>
 
@@ -225,7 +224,7 @@ export const emailTemplates = {
     const subject = isWorkshop
       ? `New Workshop Registration: ${data.firstName} ${data.lastName}`
       : `New Summit Registration: ${data.firstName} ${data.lastName}`;
-      
+
     return {
       subject,
       html: `
@@ -245,7 +244,7 @@ export const emailTemplates = {
           <body>
             <div class="container">
               <div class="header">
-                <h2>${isWorkshop ? '🎯 New Workshop Masterclass Registration' : '🎯 New Summit Registration'}</h2>
+                <h2>${isWorkshop ? '🎯 New Workshop Registration' : '🎯 New Summit Registration'}</h2>
               </div>
               <div class="content">
                 <table class="data-table">
@@ -650,7 +649,7 @@ export const emailTemplates = {
       </html>
     `,
   }),
-  
+
   // Feedback Request (Initial)
   feedbackRequest: (data: any) => ({
     subject: "Quick question about the Summit",
@@ -743,26 +742,78 @@ export const emailTemplates = {
     `,
   }),
 
-  // Broadcast Email Template (Bypasses Promotions tab by mimicking pure personal typed emails)
-  broadcast: (data: { firstName: string; subject: string; message: string; ctaText?: string; ctaUrl?: string }) => ({
-    subject: data.subject,
-    html: `
-      <p>Hey ${data.firstName || 'Builder'},</p>
+  // Broadcast Email Template
+  broadcast: (data: { firstName: string; subject: string; message: string; ctaText?: string; ctaUrl?: string; imageUrl?: string }) => {
+    const text =
+      `Dear ${data.firstName || 'Builder'},\n\n` +
+      `${data.message}\n\n` +
+      (data.ctaText && data.ctaUrl ? `${data.ctaText}: ${data.ctaUrl}\n\n` : '') +
+      `Best regards,\n` +
+      `Mercy Duru\n` +
+      `Human Capital Developer & Strategist\n` +
+      `Visionary Builders Network\n\n` +
+      `---\n` +
+      `You received this because you registered for the Visionary Builders Summit. Reply to opt out.`;
+
+    const paragraphs = data.message.split('\n').map(line => {
+      const t = line.trim();
+      if (!t) return '';
+      // Render detail lines (Date:, Time:, Mode: etc.) as muted metadata
+      if (t.match(/^(Date:|Time:|Mode:|Venue:|Friday|Saturday|Sunday|Monday)/i)) return `<p style="margin:4px 0;color:#555;font-size:14px;">${t}</p>`;
+      // Render the title line (wrapped in ─) nicely
+      if (t.includes('─')) return ''; // Hide the text dividers in HTML
+      if (t.includes('Must You Become')) return `<div style="margin:32px 0 0;font-size:19px;font-weight:bold;color:#111;line-height:1.4;">${t}<br>`;
+      if (t.includes('Build Something Meaningful')) return `${t}</div><div style="height:16px;"></div>`;
       
-      ${data.message.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
-      
+      return `<p style="margin:16px 0;">${t}</p>`;
+    }).join('');
+
+    return {
+      subject: data.subject,
+      text,
+      html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body style="margin:0;padding:0;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;font-size:16px;line-height:1.6;">
+  <div style="max-width:600px;margin:80px auto 40px;background:#ffffff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;">
+    
+    <div style="padding:64px 40px 32px;">
+      <p style="margin:0 0 24px;color:#0f172a;">Dear ${data.firstName || 'Builder'},</p>
+
+      ${data.imageUrl ? `<div style="margin-bottom: 32px; text-align: center;"><img src="${data.imageUrl}" alt="Poster" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>` : ''}
+
+      ${paragraphs}
+
       ${data.ctaText && data.ctaUrl ? `
-        <p><strong>👉 ${data.ctaText}:</strong> <a href="${data.ctaUrl}">${data.ctaUrl}</a></p>
+      <div style="margin:32px 0 8px;">
+        <a href="${data.ctaUrl}"
+           style="display:inline-block;padding:14px 28px;background:#0f172a;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:500;font-size:15px;">
+          ${data.ctaText}
+        </a>
+      </div>
       ` : ''}
-      
-      <p>Warmly,</p>
-      <p><strong>Mercy Duru</strong><br/>
-      The Visionary Builders Team</p>
-      
-      <p style="font-size: 11px; color: #777777; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 10px;">
-        Visionary Builders Network, Lagos, Nigeria.<br/>
-        You are receiving this because you registered for the Visionary Builders Summit. If you'd like to unsubscribe, simply reply to this email.
+    </div>
+
+    <div style="padding:0 40px 40px;">
+      <p style="margin:32px 0 4px;color:#0f172a;">Best regards,</p>
+      <p style="margin:0;font-weight:600;color:#0f172a;">Mercy Duru</p>
+      <p style="margin:2px 0;color:#64748b;font-size:14px;">Human Capital Developer &amp; Strategist</p>
+      <p style="margin:2px 0;color:#64748b;font-size:14px;">Visionary Builders Network</p>
+    </div>
+
+    <div style="background:#f8fafc;padding:24px 40px;border-top:1px solid #e2e8f0;text-align:center;">
+      <p style="margin:0;font-size:12px;color:#94a3b8;">
+        You received this invitation because you registered for the Visionary Builders Summit. <br>
+        If you no longer wish to receive updates, please reply to this email.
       </p>
-    `,
-  }),
+    </div>
+
+  </div>
+</body>
+</html>`,
+    };
+  },
 };
