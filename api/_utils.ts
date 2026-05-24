@@ -143,7 +143,7 @@ export const emailTemplates = {
       `;
 
     const bodyText = isWorkshop
-      ? `Thank you for registering for the live masterclass <strong>"Must You Become an Entrepreneur to Build Something Meaningful?"</strong>. We are excited to have you join us for this high-impact session led by Mercy Duru.`
+      ? `Thank you for registering for the live workshop <strong>"Must You Become an Entrepreneur to Build Something Meaningful?"</strong>. We are excited to have you join us for this high-impact session led by Mercy Duru.`
       : `Thank you for registering for the <strong>Visionary Builders Summit</strong>. We're thrilled to have you join us!`;
 
     const footerText = isWorkshop ? '© 2026 Visionary Builders Summit. All rights reserved.' : '© 2025 Visionary Builders Summit. All rights reserved.';
@@ -174,6 +174,7 @@ export const emailTemplates = {
               </div>
               <div class="content">
                 <h2>Hi ${data.firstName}!</h2>
+                ${isWorkshop ? `<div style="text-align: center; margin: 20px 0;"><img src="https://visionarybuilderssummit.com/images/workshop1_poster.jpeg" alt="Workshop Poster" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>` : ''}
                 <p>${bodyText}</p>
                 
                 ${detailsSection}
@@ -183,7 +184,6 @@ export const emailTemplates = {
                   ${isWorkshop
           ? `
                       <li><strong>Join the Session:</strong> Access the workshop via <a href="https://meet.google.com/ciu-qqko-qpk">Google Meet</a> on Friday at 8:00 PM.</li>
-                      <li>You will receive session workbook materials closer to the masterclass date.</li>
                       <li>Mark your calendar and set a reminder so you don't miss the live interaction.</li>
                       <li>Think about the systems you are building or operating today!</li>
                     `
@@ -244,7 +244,7 @@ export const emailTemplates = {
           <body>
             <div class="container">
               <div class="header">
-                <h2>${isWorkshop ? '🎯 New Workshop Masterclass Registration' : '🎯 New Summit Registration'}</h2>
+                <h2>${isWorkshop ? '🎯 New Workshop Registration' : '🎯 New Summit Registration'}</h2>
               </div>
               <div class="content">
                 <table class="data-table">
@@ -743,7 +743,7 @@ export const emailTemplates = {
   }),
 
   // Broadcast Email Template
-  broadcast: (data: { firstName: string; subject: string; message: string; ctaText?: string; ctaUrl?: string }) => {
+  broadcast: (data: { firstName: string; subject: string; message: string; ctaText?: string; ctaUrl?: string; imageUrl?: string }) => {
     const text =
       `Dear ${data.firstName || 'Builder'},\n\n` +
       `${data.message}\n\n` +
@@ -782,6 +782,8 @@ export const emailTemplates = {
     
     <div style="padding:64px 40px 32px;">
       <p style="margin:0 0 24px;color:#0f172a;">Dear ${data.firstName || 'Builder'},</p>
+
+      ${data.imageUrl ? `<div style="margin-bottom: 32px; text-align: center;"><img src="${data.imageUrl}" alt="Poster" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>` : ''}
 
       ${paragraphs}
 

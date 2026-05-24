@@ -49,7 +49,7 @@ const Workshops = () => {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary mb-4 font-bold text-xs uppercase tracking-wider">
               <Sparkles size={14} className="animate-pulse" />
-              Featured Masterclass
+              Featured Workshop
             </div>
             <h2 className="text-5xl md:text-7xl font-black text-dark tracking-tighter leading-none">
               interactive <br />
@@ -148,7 +148,7 @@ const Workshops = () => {
                   <>
                     <div>
                       <h5 className="text-sm font-black text-dark uppercase tracking-wider mb-2">
-                        Live Interactive Masterclass
+                        Live Interactive Workshop
                       </h5>
                       <p className="text-xs text-dark/50 font-medium leading-relaxed">
                         Reserve your free ticket now. Join Mercy Duru live to discover if you must become an entrepreneur to build something meaningful, or how to thrive as an intrapreneur and leader.
@@ -159,7 +159,7 @@ const Workshops = () => {
                         to="/workshop"
                         className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-primary text-white hover:bg-dark transition-all duration-300 rounded-2xl font-bold text-sm tracking-wide transform active:scale-95 shadow-md shadow-primary/20 text-center uppercase cursor-pointer"
                       >
-                        Register for Masterclass
+                        Register for Workshop
                       </Link>
                     </div>
                   </>
