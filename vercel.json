@@ -4,5 +4,19 @@
       "source": "/((?!api/|node_modules/|src/|@.*|vite/|.*\\..*).*)",
       "destination": "/index.html"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/workshop-notifications",
+      "schedule": "0 18 * * 1"
+    },
+    {
+      "path": "/api/cron/workshop-notifications",
+      "schedule": "0 18 * * 4"
+    },
+    {
+      "path": "/api/cron/workshop-notifications",
+      "schedule": "0 8 * * 5"
+    }
   ]
 }

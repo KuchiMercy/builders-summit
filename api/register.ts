@@ -1,86 +1,70 @@
-import { db, resend, emailTemplates, ADMIN_EMAIL, FROM_EMAIL } from './_utils.js';
-console.log('[DEBUG] register.ts loaded. resend is:', typeof resend);
-import { FieldValue } from 'firebase-admin/firestore';
+import { workshopRegistrationSchema } from '../src/schema/workshopRegistrationSchema.js';
+import { RegistrationService } from './_services/RegistrationService.js';
+import { ApplicationError, RateLimitError } from './_utils/errors.js';
+import { rateLimiter } from './_utils/rateLimiter.js';
+import { logger } from '../src/utils/logger.js';
+
+// Controller Layer: Only handles HTTP concerns (parsing, validation, security, response mapping)
+const registrationService = new RegistrationService();
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Debug: Check if critical env vars are present (do not log values)
-  console.log('[DEBUG] handler start. process.env.RESEND_API_KEY present:', !!process.env.RESEND_API_KEY);
-  console.log('[DEBUG] process.env.VITE_FIREBASE_PROJECT_ID:', process.env.VITE_FIREBASE_PROJECT_ID);
-
-  const envStatus = {
-    resendKey: !!process.env.RESEND_API_KEY,
-    firebaseProject: !!process.env.VITE_FIREBASE_PROJECT_ID,
-    firebaseEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
-    firebaseKey: !!process.env.FIREBASE_PRIVATE_KEY,
-    fromEmail: FROM_EMAIL,
-  };
-
   try {
-    const data = req.body;
-    let step = 'init';
+    // 1. Security & Abuse Prevention
+    // Note: Vercel specific headers like 'x-real-ip' or 'x-forwarded-for' could be used.
+    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+    await rateLimiter.check(ip as string, 5, 60); // Max 5 requests per minute per IP
 
-    // Route to the correct Firestore collection based on registration type
-    const collection = data.registrationType === 'workshop'
-      ? 'workshopRegistrations'
-      : 'registrations';
-
-    // Check for duplicate email within the same collection
-    step = 'firebase_check_duplicate';
-    const existing = await db.collection(collection)
-      .where('email', '==', data.email)
-      .get();
-
-    if (!existing.empty) {
-      return res.status(409).json({ error: 'This email is already registered.' });
+    // 2. Validation & Sanitization
+    const parseResult = workshopRegistrationSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      return res.status(400).json({
+        error: 'Invalid request data',
+        details: parseResult.error.issues,
+      });
     }
 
-    // Save to Firestore
-    step = 'firebase_save';
-    const docRef = await db.collection(collection).add({
-      ...data,
-      timestamp: FieldValue.serverTimestamp(),
+    const data = parseResult.data;
+
+    // Defense in depth: Honeypot check
+    if (data.botField) {
+      logger.info('Honeypot triggered, discarding bot request.', { ip });
+      // Silently discard, return fake success
+      return res.status(200).json({ success: true, id: 'bot-detected-ignored' });
+    }
+
+    // 3. Delegate to Business Service
+    const result = await registrationService.registerUser(data);
+
+    logger.info('User successfully registered.', { id: result.id, email: data.email });
+    return res.status(200).json({ success: true, id: result.id });
+
+  } catch (error: unknown) {
+    // Determine IP for logging
+    const ip = req.headers?.['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+
+    if (error instanceof RateLimitError) {
+      logger.warn(`Rate limit exceeded for IP: ${ip}`, { ip });
+      return res.status(error.statusCode).json({ error: error.message });
+    }
+
+    if (error instanceof ApplicationError) {
+      logger.warn(`Registration blocked: ${error.message}`, { ip, type: error.code });
+      return res.status(error.statusCode).json({ error: error.message });
+    }
+
+    // Ensure we don't leak PII into unredacted logs by only logging the error name/stack
+    logger.error('Unhandled Registration Error', { 
+      error: error instanceof Error ? error.message : 'Unknown Error',
+      stack: error instanceof Error ? error.stack : undefined,
+      ip
     });
-
-    // Send User Confirmation Email
-    step = 'resend_user_email';
-    try {
-      await resend.emails.send({
-        from: `Visionary Builders <${FROM_EMAIL}>`,
-        to: [data.email],
-        ...emailTemplates.registrationUser(data),
-      });
-      console.log(`[SUCCESS] User confirmation email sent to ${data.email}`);
-    } catch (emailError: any) {
-      console.error('User Email Error:', emailError);
-      // Don't fail the whole request, just log the failure to ensure excellent user experience.
-    }
-
-    // Send Admin Notification Email
-    step = 'resend_admin_email';
-    try {
-      await resend.emails.send({
-        from: `Visionary Builders <${FROM_EMAIL}>`,
-        to: [ADMIN_EMAIL],
-        ...emailTemplates.registrationAdmin(data),
-      });
-      console.log(`[SUCCESS] Admin notification email sent to ${ADMIN_EMAIL}`);
-    } catch (emailError: any) {
-      console.error('Admin Email Error:', emailError);
-    }
-
-    return res.status(200).json({ success: true, id: docRef.id });
-  } catch (error: any) {
-    console.error('Registration Error:', error);
+    
     return res.status(500).json({
-      error: error.message,
-      step: error.step || 'unknown',
-      envStatus,
-      // Include stack in dev/debug only, but useful here
-      details: error.response?.data || error.code
+      error: 'An internal server error occurred while processing your registration.',
     });
   }
 }
