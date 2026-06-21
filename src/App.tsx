@@ -34,6 +34,7 @@ function App() {
         <Route path="/partner-with-us" element={<PartnerWithUs />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/workshop/:id" element={<Workshop />} />
         <Route path="/workshop" element={<Workshop />} />
       </Routes>
     </Router>

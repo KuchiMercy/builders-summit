@@ -755,18 +755,23 @@ export const emailTemplates = {
       `---\n` +
       `You received this because you registered for the Visionary Builders Summit. Reply to opt out.`;
 
-    const paragraphs = data.message.split('\n').map(line => {
+    let metaContent = '';
+    const bodyParagraphs: string[] = [];
+
+    data.message.split('\n').forEach(line => {
       const t = line.trim();
-      if (!t) return '';
-      // Render detail lines (Date:, Time:, Mode: etc.) as muted metadata
-      if (t.match(/^(Date:|Time:|Mode:|Venue:|Friday|Saturday|Sunday|Monday)/i)) return `<p style="margin:4px 0;color:#555;font-size:14px;">${t}</p>`;
-      // Render the title line (wrapped in ─) nicely
-      if (t.includes('─')) return ''; // Hide the text dividers in HTML
-      if (t.includes('Must You Become')) return `<div style="margin:32px 0 0;font-size:19px;font-weight:bold;color:#111;line-height:1.4;">${t}<br>`;
-      if (t.includes('Build Something Meaningful')) return `${t}</div><div style="height:16px;"></div>`;
-      
-      return `<p style="margin:16px 0;">${t}</p>`;
-    }).join('');
+      if (!t) return;
+      if (t.includes('─')) return;
+
+      if (t.match(/^(Date:|Time:|Mode:|Venue:|Friday|Saturday|Sunday|Monday)/i)) {
+        metaContent += `<p style="margin: 4px 0; color: #475569; font-size: 14px; font-weight: 500;">${t}</p>`;
+      } else {
+        bodyParagraphs.push(`<p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #334155;">${t}</p>`);
+      }
+    });
+
+    const paragraphsHtml = bodyParagraphs.join('') + 
+      (metaContent ? `<div style="background-color: #f8fafc; border-left: 4px solid #cbd5e1; padding: 16px; margin: 24px 0; border-radius: 0 8px 8px 0;">${metaContent}</div>` : '');
 
     return {
       subject: data.subject,
@@ -776,44 +781,115 @@ export const emailTemplates = {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { margin: 0; padding: 0; background-color: #f4f5f7; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    table { border-spacing: 0; }
+    td { padding: 0; }
+    img { border: 0; }
+  </style>
 </head>
-<body style="margin:0;padding:0;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;font-size:16px;line-height:1.6;">
-  <div style="max-width:600px;margin:80px auto 40px;background:#ffffff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;">
-    
-    <div style="padding:64px 40px 32px;">
-      <p style="margin:0 0 24px;color:#0f172a;">Dear ${data.firstName || 'Builder'},</p>
+<body style="margin:0;padding:0;background-color:#f4f5f7;font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f4f5f7;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="100%" max-width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;max-width:600px;width:100%;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);border:1px solid #e2e8f0;overflow:hidden;">
+          <tr>
+            <td align="center" style="padding:32px 40px;border-bottom:1px solid #f1f5f9;background-color:#ffffff;">
+              <img src="https://visionarybuilderssummit.com/images/vbs-logo.png" alt="Visionary Builders Summit" style="height:32px;display:block;width:auto;">
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:40px;">
+              <p style="margin:0 0 24px;font-size:18px;font-weight:600;color:#0f172a;">Dear ${data.firstName || 'Builder'},</p>
 
-      ${data.imageUrl ? `<div style="margin-bottom: 32px; text-align: center;"><img src="${data.imageUrl}" alt="Poster" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>` : ''}
+              ${data.imageUrl ? `
+              <div style="margin-bottom:32px;text-align:center;border-radius:10px;overflow:hidden;">
+                <img src="${data.imageUrl}" alt="Workshop Poster" style="max-width:100%;height:auto;display:block;border-radius:10px;">
+              </div>` : ''}
 
-      ${paragraphs}
+              ${paragraphsHtml}
 
-      ${data.ctaText && data.ctaUrl ? `
-      <div style="margin:32px 0 8px;">
-        <a href="${data.ctaUrl}"
-           style="display:inline-block;padding:14px 28px;background:#0f172a;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:500;font-size:15px;">
-          ${data.ctaText}
-        </a>
-      </div>
-      ` : ''}
-    </div>
-
-    <div style="padding:0 40px 40px;">
-      <p style="margin:32px 0 4px;color:#0f172a;">Best regards,</p>
-      <p style="margin:0;font-weight:600;color:#0f172a;">Mercy Duru</p>
-      <p style="margin:2px 0;color:#64748b;font-size:14px;">Human Capital Developer &amp; Strategist</p>
-      <p style="margin:2px 0;color:#64748b;font-size:14px;">Visionary Builders Network</p>
-    </div>
-
-    <div style="background:#f8fafc;padding:24px 40px;border-top:1px solid #e2e8f0;text-align:center;">
-      <p style="margin:0;font-size:12px;color:#94a3b8;">
-        You received this invitation because you registered for the Visionary Builders Summit. <br>
-        If you no longer wish to receive updates, please reply to this email.
-      </p>
-    </div>
-
-  </div>
+              ${data.ctaText && data.ctaUrl ? `
+              <table border="0" cellspacing="0" cellpadding="0" style="margin:16px 0;">
+                <tr>
+                  <td align="center" style="border-radius:8px;background-color:#0f172a;">
+                    <a href="${data.ctaUrl}" target="_blank" style="display:inline-block;padding:14px 28px;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;color:#ffffff;text-decoration:none;border-radius:8px;border:1px solid #0f172a;">
+                      ${data.ctaText}
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              ` : ''}
+              
+              <div style="margin-top:40px;padding-top:24px;border-top:1px solid #f1f5f9;">
+                <p style="margin:0 0 4px;font-weight:600;color:#0f172a;font-size:16px;">Mercy Duru</p>
+                <p style="margin:0 0 2px;color:#64748b;font-size:14px;">Human Capital Developer &amp; Strategist</p>
+                <p style="margin:0;color:#64748b;font-size:14px;">Visionary Builders Network</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:24px 40px;background-color:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;">
+              <p style="margin:0;font-size:13px;color:#94a3b8;line-height:1.5;">
+                You received this email because you registered for the Visionary Builders Summit. <br>
+                If you no longer wish to receive updates, please <a href="mailto:contact@visionarybuilderssummit.com?subject=Unsubscribe" style="color:#64748b;text-decoration:underline;">unsubscribe here</a>.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`,
     };
   },
+  notificationMonday: (data: any) => emailTemplates.broadcast({
+    firstName: data.firstName,
+    subject: "Visionary Builders: Weekly Focus & Upcoming Sessions",
+    message: `Welcome to a new week! We hope you have a productive week ahead.
+
+This Friday, we are hosting our next workshop: Building in an Era of AI.
+This session explores how Artificial Intelligence is transforming industries, redefining the future of work, and creating new opportunities for innovation.
+
+Date: Friday, June 26, 2026
+Time: 8:00 PM - 9:00 PM
+Venue: Check your inbox for the link on Friday
+
+Prepare your questions and get ready to learn!`,
+    imageUrl: "https://visionarybuilderssummit.com/images/workshop2_poster.jpeg",
+    ctaText: "View Workshop Details",
+    ctaUrl: "https://visionarybuilderssummit.com/workshop",
+  }),
+
+  notificationThursday: (data: any) => emailTemplates.broadcast({
+    firstName: data.firstName,
+    subject: "Tomorrow is the Day! 📅",
+    message: `Just a quick reminder that our next session is happening tomorrow!
+
+Prepare your questions and get ready to learn about Building in an Era of AI with Samuel Ufere.
+
+Date: Friday, June 26, 2026
+Time: 8:00 PM - 9:00 PM
+Venue: Check your inbox for the link tomorrow`,
+    imageUrl: "https://visionarybuilderssummit.com/images/workshop2_poster.jpeg",
+    ctaText: "View Workshop Details",
+    ctaUrl: "https://visionarybuilderssummit.com/workshop",
+  }),
+
+  notificationFriday: (data: any) => emailTemplates.broadcast({
+    firstName: data.firstName,
+    subject: "It's Happening Today! ⏰",
+    message: `We are going live today. Don't miss this opportunity to connect and grow.
+
+Join us for Building in an Era of AI as we explore how AI is transforming industries and the future of work.
+
+Date: Friday, June 26, 2026
+Time: 8:00 PM - 9:00 PM
+Venue: Link will be shared in the community group!`,
+    imageUrl: "https://visionarybuilderssummit.com/images/workshop2_poster.jpeg",
+    ctaText: "View Workshop Details",
+    ctaUrl: "https://visionarybuilderssummit.com/workshop",
+  })
 };

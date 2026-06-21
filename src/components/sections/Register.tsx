@@ -1,82 +1,30 @@
-import React, { useState } from "react";
 import { Send, CheckCircle, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registrationSchema } from "../../schema/registrationSchema";
+import type { RegistrationFormData } from "../../schema/registrationSchema";
+import { useRegistration } from "../../hooks/useRegistration";
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    linkedin: "",
-    cityCountry: "",
-    organization: "",
-    role: "",
-    industry: "",
-    experience: "",
-    source: "",
-    goals: "",
-    community: false,
+  const { status, errorMessage, submitRegistration } = useRegistration();
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset
+  } = useForm<RegistrationFormData>({
+    resolver: zodResolver(registrationSchema),
+    defaultValues: {
+      community: false,
+    }
   });
 
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user types
-    if (status === "error") {
-      setStatus("idle");
-      setErrorMessage("");
-    }
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: checked }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-    setErrorMessage("");
-
-    try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error("Registration failed details:", data);
-        throw new Error(data.error || 'Registration failed');
-      }
-
-      setStatus("success");
-      // Reset form after success
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        linkedin: "",
-        cityCountry: "",
-        organization: "",
-        role: "",
-        industry: "",
-        experience: "",
-        source: "",
-        goals: "",
-        community: false,
-      });
-    } catch (error: any) {
-      console.error("Error submitting registration:", error);
-      setStatus("error");
-      setErrorMessage(error.message || "Something went wrong. Please try again.");
+  const onSubmit = async (data: RegistrationFormData) => {
+    const success = await submitRegistration(data);
+    if (success) {
+      reset();
     }
   };
 
@@ -87,7 +35,6 @@ const Register = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
-
           <h2 className="text-5xl md:text-7xl font-black text-dark mb-6 tracking-tighter">
             JOIN THE COMMUNITY
           </h2>
@@ -117,80 +64,74 @@ const Register = () => {
                   <MessageCircle size={20} />
                   Join WhatsApp Group
                 </a>
-                {/* <a
-                  href="https://t.me/+bbWMiaunIjczODFk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-[#0088cc] text-white rounded-xl font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg hover:transform hover:scale-105"
-                >
-                  <Send size={20} />
-                  Join Telegram Group
-                </a> */}
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">First Name *</label>
+                  <label htmlFor="firstName" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">First Name *</label>
                   <input
+                    id="firstName"
                     type="text"
-                    name="firstName"
-                    required
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("firstName")}
+                    aria-invalid={errors.firstName ? "true" : "false"}
+                    aria-describedby={errors.firstName ? "firstName-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.firstName ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="Jane"
                   />
+                  {errors.firstName && <p id="firstName-error" className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Last Name *</label>
+                  <label htmlFor="lastName" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Last Name *</label>
                   <input
+                    id="lastName"
                     type="text"
-                    name="lastName"
-                    required
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("lastName")}
+                    aria-invalid={errors.lastName ? "true" : "false"}
+                    aria-describedby={errors.lastName ? "lastName-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.lastName ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="Doe"
                   />
+                  {errors.lastName && <p id="lastName-error" className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Email Address *</label>
+                  <label htmlFor="email" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Email Address *</label>
                   <input
+                    id="email"
                     type="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("email")}
+                    aria-invalid={errors.email ? "true" : "false"}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.email ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="jane@example.com"
                   />
+                  {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Phone Number *</label>
+                  <label htmlFor="phone" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Phone Number *</label>
                   <input
+                    id="phone"
                     type="tel"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("phone")}
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.phone ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="+1 (555) 000-0000"
                   />
+                  {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">LinkedIn Profile / Website</label>
+                <label htmlFor="linkedin" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">LinkedIn Profile / Website</label>
                 <input
+                  id="linkedin"
                   type="text"
-                  name="linkedin"
-                  value={formData.linkedin}
-                  onChange={handleChange}
+                  {...register("linkedin")}
                   className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
                   placeholder="linkedin.com/in/janedoe"
                 />
@@ -198,52 +139,55 @@ const Register = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">City & Country *</label>
+                  <label htmlFor="cityCountry" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">City & Country *</label>
                   <input
+                    id="cityCountry"
                     type="text"
-                    name="cityCountry"
-                    required
-                    value={formData.cityCountry}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("cityCountry")}
+                    aria-invalid={errors.cityCountry ? "true" : "false"}
+                    aria-describedby={errors.cityCountry ? "cityCountry-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.cityCountry ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="New York, USA"
                   />
+                  {errors.cityCountry && <p id="cityCountry-error" className="text-red-500 text-sm mt-1">{errors.cityCountry.message}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Organization *</label>
+                  <label htmlFor="organization" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Organization *</label>
                   <input
+                    id="organization"
                     type="text"
-                    name="organization"
-                    required
-                    value={formData.organization}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("organization")}
+                    aria-invalid={errors.organization ? "true" : "false"}
+                    aria-describedby={errors.organization ? "organization-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.organization ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="Company Name"
                   />
+                  {errors.organization && <p id="organization-error" className="text-red-500 text-sm mt-1">{errors.organization.message}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Job Title / Role *</label>
+                  <label htmlFor="role" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Job Title / Role *</label>
                   <input
+                    id="role"
                     type="text"
-                    name="role"
-                    required
-                    value={formData.role}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg"
+                    {...register("role")}
+                    aria-invalid={errors.role ? "true" : "false"}
+                    aria-describedby={errors.role ? "role-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.role ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg`}
                     placeholder="Product Manager"
                   />
+                  {errors.role && <p id="role-error" className="text-red-500 text-sm mt-1">{errors.role.message}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Industry / Sector *</label>
+                  <label htmlFor="industry" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Industry / Sector *</label>
                   <select
-                    name="industry"
-                    required
-                    value={formData.industry}
-                    onChange={handleChange}
-                    className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg appearance-none"
+                    id="industry"
+                    {...register("industry")}
+                    aria-invalid={errors.industry ? "true" : "false"}
+                    aria-describedby={errors.industry ? "industry-error" : undefined}
+                    className={`w-full bg-primary/5 border-b-2 ${errors.industry ? 'border-red-500' : 'border-dark/10'} px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg appearance-none`}
                   >
                     <option value="">Select Industry</option>
                     <option value="Tech">Tech</option>
@@ -255,16 +199,16 @@ const Register = () => {
                     <option value="Fashion">Fashion</option>
                     <option value="Other">Other</option>
                   </select>
+                  {errors.industry && <p id="industry-error" className="text-red-500 text-sm mt-1">{errors.industry.message}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Years of Experience</label>
+                  <label htmlFor="experience" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">Years of Experience</label>
                   <select
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleChange}
+                    id="experience"
+                    {...register("experience")}
                     className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg appearance-none"
                   >
                     <option value="">Select Experience</option>
@@ -275,11 +219,10 @@ const Register = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">How did you hear about us?</label>
+                  <label htmlFor="source" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">How did you hear about us?</label>
                   <select
-                    name="source"
-                    value={formData.source}
-                    onChange={handleChange}
+                    id="source"
+                    {...register("source")}
                     className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg appearance-none"
                   >
                     <option value="">Select Source</option>
@@ -293,12 +236,11 @@ const Register = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">What are your key goals for attending?</label>
+                <label htmlFor="goals" className="block text-sm font-bold text-dark uppercase tracking-wide mb-2">What are your key goals for attending?</label>
                 <textarea
-                  name="goals"
+                  id="goals"
+                  {...register("goals")}
                   rows={3}
-                  value={formData.goals}
-                  onChange={handleChange}
                   className="w-full bg-primary/5 border-b-2 border-dark/10 px-4 py-4 text-dark focus:outline-none focus:border-primary focus:bg-white transition-all font-medium text-lg resize-none"
                   placeholder="How can we help you build?"
                 ></textarea>
@@ -307,10 +249,8 @@ const Register = () => {
               <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
                 <input
                   type="checkbox"
-                  name="community"
                   id="community"
-                  checked={formData.community}
-                  onChange={handleCheckboxChange}
+                  {...register("community")}
                   className="w-5 h-5 rounded border-gray-300 text-dark focus:ring-dark bg-white"
                 />
                 <label htmlFor="community" className="text-gray-700 text-sm font-medium cursor-pointer">
@@ -334,10 +274,10 @@ const Register = () => {
 
               <button
                 type="submit"
-                disabled={status === "submitting"}
+                disabled={isSubmitting || status === "submitting"}
                 className="w-full bg-primary text-white font-bold py-5 rounded-xl hover:opacity-90 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-xl text-lg"
               >
-                {status === "submitting" ? (
+                {isSubmitting || status === "submitting" ? (
                   "Processing..."
                 ) : (
                   <>
