@@ -94,7 +94,7 @@ export default async function handler(req: any, res: any) {
               to: data.email,
               ...templateToUse(data)
             });
-            
+
             // Mark as sent in Firestore
             await doc.ref.update({
               remindersSent: FieldValue.arrayUnion(reminderKey)
@@ -109,7 +109,7 @@ export default async function handler(req: any, res: any) {
           } catch (err) {
             attempts++;
             console.error(`[CRON] Attempt ${attempts} failed for ${data.email}:`, err);
-            
+
             if (attempts >= maxAttempts) {
               console.error(`[CRON] Giving up on ${data.email} after ${maxAttempts} attempts.`);
             } else {
