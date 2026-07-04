@@ -90,7 +90,7 @@ export const workshops: WorkshopData[] = [
     track: "Health & Wellness",
     level: "All Levels",
     description: "This session discusses the possibilities of work-life balance at the early stage of building and its effect on the mental health.",
-    isActive: false,
+    isActive: true,
     facilitator: {
       name: "Confidence Emmanuel",
       role: "Mental Health Professional",
@@ -200,7 +200,7 @@ export const workshops: WorkshopData[] = [
 export const allWorkshops = workshops;
 
 export const getActiveWorkshop = (): WorkshopData => {
-  return workshops.find(w => w.id === "ws-june-2026") || workshops[1];
+  return workshops.find(w => w.id === "ws-july-2026") || workshops[2];
 };
 
 export const getWorkshopById = (id: string): WorkshopData | undefined => {
