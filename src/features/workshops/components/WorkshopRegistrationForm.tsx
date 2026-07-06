@@ -84,18 +84,18 @@ export const WorkshopRegistrationForm = ({ workshop }: WorkshopRegistrationFormP
             <CheckCircle size={48} className="text-green-600" />
           </div>
           <h4 className="text-4xl font-black text-dark mb-4">You're registered!</h4>
-          <p className="text-xl text-gray-600 mb-4">Your spot has been reserved. Check your email for a confirmation and details.</p>
+          <p className="text-xl text-gray-600 mb-4">An email will be sent to you a few days to the workshop, but you can join the community for live updates.</p>
           <p className="text-sm text-gray-500 mb-8 font-semibold uppercase tracking-wider">
             Join us live on <time>{workshop.time.split(' | ')[0]}</time> at <time>{workshop.time.split(' | ')[1].split(' - ')[0]}</time>
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <a
-              href="https://meet.google.com/ciu-qqko-qpk"
+              href="https://chat.whatsapp.com/IFxxRgwP0cQCWq00VjAt1M"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer text-center uppercase text-sm tracking-wider focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer text-center uppercase text-sm tracking-wider focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366]"
             >
-              Google Meet Link
+              Join Community
             </a>
           </div>
         </div>

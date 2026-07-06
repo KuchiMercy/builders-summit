@@ -83,9 +83,36 @@ export const workshops: WorkshopData[] = [
   },
   {
     id: "ws-july-2026",
-    title: "Burnout Culture I: Worklife balance and your Mental Health",
+    title: "Burnout Culture I: Nutrition and Physical Health for Professionals",
     date: new Date(2026, 6, 31, 20, 0),
     time: "Friday, July 31, 2026 | 8:00 PM - 9:00 PM",
+    duration: "60 Minutes",
+    track: "Health & Wellness",
+    level: "All Levels",
+    description: "This session discusses the possibilities of healthy nutrition for professionals and maintaining optimum physical health.",
+    isActive: true,
+    facilitator: {
+      name: "Lois - Gojen Health",
+      role: "Nutrition & Physical Health Expert",
+      bio: "Lois from Gojen Health specializes in creating accessible health routines for busy founders and builders.",
+      avatar: "",
+    },
+    syllabus: [
+      { topic: "Dieting", detail: "Sustainable eating habits for energy and focus" },
+      { topic: "Physical Activity", detail: "Integrating movement into a busy schedule" },
+      { topic: "Healthcare Routines", detail: "Preventative care and physical maintenance" }
+    ],
+    takeaways: [
+      "Dieting",
+      "Physical Activity",
+      "Healthcare Routines"
+    ]
+  },
+  {
+    id: "ws-august-2026",
+    title: "Burnout Culture II: Worklife balance and your Mental Health",
+    date: new Date(2026, 7, 28, 20, 0),
+    time: "Friday, August 28, 2026 | 8:00 PM - 9:00 PM",
     duration: "60 Minutes",
     track: "Health & Wellness",
     level: "All Levels",
@@ -106,33 +133,6 @@ export const workshops: WorkshopData[] = [
       "Effects of Burnout",
       "Symptoms of poor mental health",
       "Mental Health Care Routines"
-    ]
-  },
-  {
-    id: "ws-august-2026",
-    title: "Burnout Culture II: Nutrition and Physical Health for Professionals",
-    date: new Date(2026, 7, 28, 20, 0),
-    time: "Friday, August 28, 2026 | 8:00 PM - 9:00 PM",
-    duration: "60 Minutes",
-    track: "Health & Wellness",
-    level: "All Levels",
-    description: "This session discusses the possibilities of healthy nutrition for professionals and maintaining optimum physical health.",
-    isActive: false,
-    facilitator: {
-      name: "Lois - Gojen Health",
-      role: "Nutrition & Physical Health Expert",
-      bio: "Lois from Gojen Health specializes in creating accessible health routines for busy founders and builders.",
-      avatar: "",
-    },
-    syllabus: [
-      { topic: "Dieting", detail: "Sustainable eating habits for energy and focus" },
-      { topic: "Physical Activity", detail: "Integrating movement into a busy schedule" },
-      { topic: "Healthcare Routines", detail: "Preventative care and physical maintenance" }
-    ],
-    takeaways: [
-      "Dieting",
-      "Physical Activity",
-      "Healthcare Routines"
     ]
   },
   {
@@ -200,7 +200,7 @@ export const workshops: WorkshopData[] = [
 export const allWorkshops = workshops;
 
 export const getActiveWorkshop = (): WorkshopData => {
-  return workshops.find(w => w.id === "ws-june-2026") || workshops[1];
+  return workshops.find(w => w.id === "ws-july-2026") || workshops[2];
 };
 
 export const getWorkshopById = (id: string): WorkshopData | undefined => {
