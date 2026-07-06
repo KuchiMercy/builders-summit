@@ -83,41 +83,14 @@ export const workshops: WorkshopData[] = [
   },
   {
     id: "ws-july-2026",
-    title: "Burnout Culture I: Worklife balance and your Mental Health",
+    title: "Burnout Culture I: Nutrition and Physical Health for Professionals",
     date: new Date(2026, 6, 31, 20, 0),
     time: "Friday, July 31, 2026 | 8:00 PM - 9:00 PM",
     duration: "60 Minutes",
     track: "Health & Wellness",
     level: "All Levels",
-    description: "This session discusses the possibilities of work-life balance at the early stage of building and its effect on the mental health.",
-    isActive: true,
-    facilitator: {
-      name: "Confidence Emmanuel",
-      role: "Mental Health Professional",
-      bio: "Confidence Emmanuel focuses on mental health advocacy and practical routines for high-performing professionals.",
-      avatar: "",
-    },
-    syllabus: [
-      { topic: "Effects of Burnout", detail: "Understanding the physical and psychological toll" },
-      { topic: "Symptoms of poor mental health", detail: "Identifying early warning signs" },
-      { topic: "Mental Health Care Routines", detail: "Building sustainable habits for resilience" }
-    ],
-    takeaways: [
-      "Effects of Burnout",
-      "Symptoms of poor mental health",
-      "Mental Health Care Routines"
-    ]
-  },
-  {
-    id: "ws-august-2026",
-    title: "Burnout Culture II: Nutrition and Physical Health for Professionals",
-    date: new Date(2026, 7, 28, 20, 0),
-    time: "Friday, August 28, 2026 | 8:00 PM - 9:00 PM",
-    duration: "60 Minutes",
-    track: "Health & Wellness",
-    level: "All Levels",
     description: "This session discusses the possibilities of healthy nutrition for professionals and maintaining optimum physical health.",
-    isActive: false,
+    isActive: true,
     facilitator: {
       name: "Lois - Gojen Health",
       role: "Nutrition & Physical Health Expert",
@@ -133,6 +106,33 @@ export const workshops: WorkshopData[] = [
       "Dieting",
       "Physical Activity",
       "Healthcare Routines"
+    ]
+  },
+  {
+    id: "ws-august-2026",
+    title: "Burnout Culture II: Worklife balance and your Mental Health",
+    date: new Date(2026, 7, 28, 20, 0),
+    time: "Friday, August 28, 2026 | 8:00 PM - 9:00 PM",
+    duration: "60 Minutes",
+    track: "Health & Wellness",
+    level: "All Levels",
+    description: "This session discusses the possibilities of work-life balance at the early stage of building and its effect on the mental health.",
+    isActive: false,
+    facilitator: {
+      name: "Confidence Emmanuel",
+      role: "Mental Health Professional",
+      bio: "Confidence Emmanuel focuses on mental health advocacy and practical routines for high-performing professionals.",
+      avatar: "",
+    },
+    syllabus: [
+      { topic: "Effects of Burnout", detail: "Understanding the physical and psychological toll" },
+      { topic: "Symptoms of poor mental health", detail: "Identifying early warning signs" },
+      { topic: "Mental Health Care Routines", detail: "Building sustainable habits for resilience" }
+    ],
+    takeaways: [
+      "Effects of Burnout",
+      "Symptoms of poor mental health",
+      "Mental Health Care Routines"
     ]
   },
   {
