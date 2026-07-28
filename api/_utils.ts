@@ -84,7 +84,7 @@ export const emailTemplates = {
   registrationUser: (data: any) => {
     const isWorkshop = data.registrationType === 'workshop';
     const subject = isWorkshop
-      ? "Workshop Registration Confirmed: Must You Become an Entrepreneur? 🚀"
+      ? "Workshop Registration Confirmed: Burnout Culture I 🚀"
       : "Welcome to Visionary Builders Summit! 🎉";
 
     const headerTitle = isWorkshop
@@ -92,7 +92,7 @@ export const emailTemplates = {
       : "🎉 You're Registered!";
 
     const headerSub = isWorkshop
-      ? "Must You Become an Entrepreneur to Build Something Meaningful?"
+      ? "Burnout Culture I: Nutrition and Physical Health for Professionals"
       : "Welcome to the Visionary Builders Summit";
 
     const detailsSection = isWorkshop
@@ -100,13 +100,13 @@ export const emailTemplates = {
         <div class="details">
           <h3>Your Workshop Details:</h3>
           <div class="detail-row">
-            <span class="detail-label">Topic:</span> Must You Become an Entrepreneur to Build Something Meaningful?
+            <span class="detail-label">Topic:</span> Burnout Culture I: Nutrition and Physical Health for Professionals
           </div>
           <div class="detail-row">
-            <span class="detail-label">Facilitator:</span> Mercy Duru
+            <span class="detail-label">Facilitator:</span> Lois (Gojen Health)
           </div>
           <div class="detail-row">
-            <span class="detail-label">Time:</span> Friday, May 29, 2026 | 8:00 PM - 9:00 PM
+            <span class="detail-label">Time:</span> Friday, July 31, 2026 | 8:00 PM - 9:00 PM
           </div>
 
           <div class="detail-row">
@@ -141,7 +141,7 @@ export const emailTemplates = {
       `;
 
     const bodyText = isWorkshop
-      ? `Thank you for registering for the live workshop <strong>"Must You Become an Entrepreneur to Build Something Meaningful?"</strong>. We are excited to have you join us for this high-impact session led by Mercy Duru.`
+      ? `Thank you for registering for the live workshop <strong>"Burnout Culture I: Nutrition and Physical Health for Professionals"</strong>. We are excited to have you join us for this high-impact session led by Lois from Gojen Health.`
       : `Thank you for registering for the <strong>Visionary Builders Summit</strong>. We're thrilled to have you join us!`;
 
     const footerText = isWorkshop ? '© 2026 Visionary Builders Summit. All rights reserved.' : '© 2025 Visionary Builders Summit. All rights reserved.';
