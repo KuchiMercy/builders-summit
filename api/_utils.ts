@@ -80,6 +80,45 @@ export const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@visionarybuilderssu
 
 // Email Templates
 export const emailTemplates = {
+  // Personal plain-text style email to avoid Promotions tab
+  personalInvite: (data: { firstName: string; subject: string; message: string; imageUrl?: string; }) => {
+    const text =
+      `Dear ${data.firstName || 'Builder'},\n\n` +
+      `${data.message}\n\n` +
+      (data.imageUrl ? `[Workshop Poster: ${data.imageUrl}]\n\n` : '') +
+      `Best regards,\n` +
+      `Mercy Duru\n` +
+      `Human Capital Developer & Strategist\n` +
+      `Visionary Builders Network`;
+
+    const bodyParagraphs = data.message.split('\n')
+      .map(line => line.trim())
+      .filter(line => line)
+      .map(line => `<p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #111827;">${line}</p>`)
+      .join('');
+
+    const imageHtml = data.imageUrl 
+      ? `<div style="margin: 24px 0;"><img src="${data.imageUrl}" alt="Workshop Poster" style="max-width: 100%; height: auto; border-radius: 8px;"></div>`
+      : '';
+
+    return {
+      subject: data.subject,
+      text,
+      html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body style="margin:0;padding:24px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111827;max-width:600px;background-color:#ffffff;">
+  ${imageHtml}
+  <p style="margin: 0 0 16px; font-size: 15px; font-weight: 500;">Dear ${data.firstName || 'Builder'},</p>
+  ${bodyParagraphs}
+  <p style="margin: 32px 0 0; font-size: 15px;">Best regards,<br><strong>Mercy Duru</strong><br>Human Capital Developer &amp; Strategist<br>Visionary Builders Network</p>
+</body>
+</html>`,
+    };
+  },
+
   // Registration confirmation email
   registrationUser: (data: any) => {
     const isWorkshop = data.registrationType === 'workshop';
