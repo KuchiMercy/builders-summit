@@ -1,4 +1,5 @@
 import { workshopRegistrationSchema } from '../src/schema/workshopRegistrationSchema.js';
+import { registrationSchema } from '../src/schema/registrationSchema.js';
 import { RegistrationService } from './_services/RegistrationService.js';
 import { ApplicationError, RateLimitError } from './_utils/errors.js';
 import { rateLimiter } from './_utils/rateLimiter.js';
@@ -19,8 +20,13 @@ export default async function handler(req: any, res: any) {
     await rateLimiter.check(ip as string, 5, 60); // Max 5 requests per minute per IP
 
     // 2. Validation & Sanitization
-    const parseResult = workshopRegistrationSchema.safeParse(req.body);
+    const schema = req.body?.registrationType === 'workshop' 
+      ? workshopRegistrationSchema 
+      : registrationSchema;
+      
+    const parseResult = schema.safeParse(req.body);
     if (!parseResult.success) {
+      console.error("Validation failed. Body received:", JSON.stringify(req.body));
       return res.status(400).json({
         error: 'Invalid request data',
         details: parseResult.error.issues,
@@ -30,7 +36,7 @@ export default async function handler(req: any, res: any) {
     const data = parseResult.data;
 
     // Defense in depth: Honeypot check
-    if (data.botField) {
+    if ('botField' in data && data.botField) {
       logger.info('Honeypot triggered, discarding bot request.', { ip });
       // Silently discard, return fake success
       return res.status(200).json({ success: true, id: 'bot-detected-ignored' });
